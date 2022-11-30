@@ -1,4 +1,4 @@
-import { StyledTopPage, StyledSong } from '@components/styles/Core.styled';
+import { StyledTopPage, StyledSong, Placeholder } from '@components/styles/Core.styled';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import styled from 'styled-components';
@@ -6,8 +6,20 @@ import styled from 'styled-components';
 export default function Home() {
 	const topTracks = trpc.topTracks.useQuery({ range: 'short_term' });
 
-	if (!topTracks.data) return <div>Loading...</div>;
-	if (topTracks.error) return <div>Error!</div>;
+	if (!topTracks.data)
+		return (
+			<StyledTopPage>
+				<h1>Loading...</h1>
+				<Placeholder height='90vh' />
+			</StyledTopPage>
+		);
+	if (topTracks.error)
+		return (
+			<StyledTopPage>
+				<h1>Error!</h1>
+				<Placeholder height='90vh' />
+			</StyledTopPage>
+		);
 
 	return (
 		<StyledTopPage>
