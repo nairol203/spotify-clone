@@ -48,7 +48,7 @@ export const appRouter = router({
 	recentlyPlayed: procedure.query(async () => {
 		const { access_token } = await getAccessToken();
 
-		const res = await fetch(`${API_ENDPOINT}/me/player/recently-played`, {
+		const res = await fetch(`${API_ENDPOINT}/me/player/recently-played?limit=50`, {
 			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${access_token}`,
