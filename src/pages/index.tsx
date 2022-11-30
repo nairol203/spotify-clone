@@ -40,7 +40,7 @@ export default function Home() {
 								{
 									// @ts-expect-error
 									currentlyPlaying.data.item?.artists.map(artist => (
-										<span>{artist.name}</span>
+										<span key={artist.id}>{artist.name}</span>
 									))
 								}
 							</div>
