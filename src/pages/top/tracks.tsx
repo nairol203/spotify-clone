@@ -25,14 +25,14 @@ export default function Home() {
 			</div>
 			<div className='songs'>
 				{topTracks.data.items.map((item, index) => (
-					<StyledSong>
+					<StyledSong key={item.id}>
 						<div className='index'>{index + 1}</div>
 						<Image src={item.album.images[0].url} height={65} width={65} alt='Album Cover' />
 						<div className='song'>
 							<h3>{item.name}</h3>
 							<div className='artists'>
 								{item.artists.map(artist => (
-									<span>{artist.name}</span>
+									<span key={artist.id}>{artist.name}</span>
 								))}
 							</div>
 						</div>

@@ -51,7 +51,7 @@ export default function Home() {
 			<h1>Recently Played</h1>
 			<div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
 				{topTracks.data.items.map(item => (
-					<StyledSong>
+					<StyledSong key={item.track.id}>
 						<div
 							style={{
 								fontSize: '1.2em',
@@ -66,7 +66,7 @@ export default function Home() {
 							<h3>{item.track.name}</h3>
 							<div className='artists'>
 								{item.track.artists.map(artist => (
-									<span>{artist.name}</span>
+									<span key={artist.id}>{artist.name}</span>
 								))}
 							</div>
 						</div>
