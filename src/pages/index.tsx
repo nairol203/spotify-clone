@@ -32,16 +32,18 @@ export default function Home() {
 					<h1>Currently Playing</h1>
 					<Card key={currentlyPlaying.data?.item.id}>
 						<Flex gap='1em' align='center'>
-							<Image
-								src={
-									// @ts-expect-error
-									currentlyPlaying.data?.item.album.images[0].url
-								}
-								height={75}
-								width={75}
-								alt='Album Cover'
-								style={{ borderRadius: '0.25em' }}
-							/>
+							<a style={{ display: 'flex', justifyContent: 'center' }} href={currentlyPlaying.data.item.external_urls.spotify} target='_blank' rel='noreferrer'>
+								<Image
+									src={
+										// @ts-expect-error
+										currentlyPlaying.data?.item.album.images[0].url
+									}
+									height={75}
+									width={75}
+									alt='Album Cover'
+									style={{ borderRadius: '0.25em' }}
+								/>
+							</a>
 							<Flex gap='.25em' direction='column'>
 								<h3>{currentlyPlaying.data?.item.name}</h3>
 								<Group>
