@@ -8,8 +8,8 @@ export const appRouter = router({
 	topTracks: procedure
 		.input(
 			z.object({
-				range: z.string(),
-				limit: z.optional(z.string()), // 'short_term' | 'medium_term' | 'long_term'
+				range: z.enum(['short_term', 'medium_term', 'long_term']),
+				limit: z.optional(z.string()),
 			})
 		)
 		.query(async ({ input }) => {
@@ -28,8 +28,8 @@ export const appRouter = router({
 	topArtists: procedure
 		.input(
 			z.object({
-				range: z.string(),
-				limit: z.optional(z.string()), // 'short_term' | 'medium_term' | 'long_term'
+				range: z.enum(['short_term', 'medium_term', 'long_term']),
+				limit: z.optional(z.string()),
 			})
 		)
 		.query(async ({ input }) => {

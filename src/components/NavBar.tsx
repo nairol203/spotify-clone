@@ -45,9 +45,9 @@ export default function NavBar() {
 			<Link href='/'>
 				<Image src='/logo.png' alt='Logo von Nairol Price Check' width={40} height={40} />
 			</Link>
-			<Link className={router.pathname == '/' ? 'active' : ''} href='/'>
+			{/* <Link className={router.pathname == '/' ? 'active' : ''} href='/'>
 				Home
-			</Link>
+			</Link> */}
 			<Link className={router.pathname == '/top/artists' ? 'active' : ''} href='/top/artists'>
 				Top Artists
 			</Link>

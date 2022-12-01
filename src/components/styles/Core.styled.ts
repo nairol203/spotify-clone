@@ -174,62 +174,22 @@ export const Form = styled.form`
 
 export const StyledTopPage = styled.div`
 	display: flex;
-	padding: 1em;
 	flex-direction: column;
 	gap: 1em;
-
-	.selector {
-		display: flex;
-		gap: 1em;
-
-		a {
-			cursor: not-allowed;
-		}
-	}
-
-	.songs {
-		display: flex;
-		flex-direction: column;
-		gap: 1em;
-	}
+	padding: 1em;
 `;
 
-export const StyledSong = styled.div`
+interface FlexProps {
+	justify?: 'space-between' | 'flex-start' | 'center' | 'space-around';
+	align?: 'space-between' | 'flex-start' | 'center';
+	direction?: 'column' | 'row' | 'column-reverse';
+	gap?: string;
+}
+
+export const Flex = styled.div<FlexProps>`
 	display: flex;
-	gap: 1em;
-	align-items: center;
-
-	.index {
-		font-size: 2em;
-		width: 1.5em;
-		height: 65px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: ${({ theme }) => theme.colors.card};
-		border-radius: 0.25em;
-	}
-
-	img {
-		border-radius: 0.25em;
-	}
-
-	.song {
-		display: flex;
-		flex-direction: column;
-		gap: 0.25em;
-		justify-content: center;
-	}
-
-	.artists {
-		display: flex;
-		gap: 0.5em;
-		align-items: center;
-
-		span {
-			background-color: ${({ theme }) => theme.colors.card};
-			padding: 0.5em;
-			border-radius: 0.25em;
-		}
-	}
+	flex-direction: ${({ direction }) => direction};
+	gap: ${({ gap }) => gap || '.5em'};
+	justify-content: ${({ justify }) => justify};
+	align-items: ${({ align }) => align};
 `;
