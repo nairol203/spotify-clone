@@ -129,8 +129,8 @@ export const Chip = styled.a<ChipProps>`
 export const RadioChip = styled(Chip)<RadioChipProps>`
 	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
 		&:hover {
-			color: ${({ theme, active }) => !active && '#000'};
-			background-color: ${({ theme, active }) => !active && theme.colors.secondary};
+			color: ${({ theme, active }) => (active ? theme.colors.text : '#000')};
+			background-color: ${({ theme, active }) => (active ? theme.colors.primary : theme.colors.secondary)};
 		}
 	}
 `;
