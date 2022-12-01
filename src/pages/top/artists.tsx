@@ -35,7 +35,9 @@ export default function Home() {
 				{topTracks.data.items.map((item, index) => (
 					<Card key={item.id}>
 						<Flex gap='1em' align='center'>
-							<Image src={item.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
+							<a style={{ display: 'flex', justifyContent: 'center' }} href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
+								<Image src={item.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
+							</a>
 							<h3>{item.name}</h3>
 						</Flex>
 					</Card>

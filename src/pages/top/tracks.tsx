@@ -35,12 +35,14 @@ export default function Home() {
 				{topTracks.data.items.map(item => (
 					<Card key={item.id}>
 						<Flex gap='1em' align='center'>
-							<Image src={item.album.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
+							<a style={{ display: 'flex', justifyContent: 'center' }} href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
+								<Image src={item.album.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
+							</a>
 							<Flex gap='.25em' direction='column'>
 								<h3>{item.name}</h3>
 								<Group className='artists'>
 									{item.artists.map(artist => (
-										<Chip key={artist.id} variant='secondary'>
+										<Chip clickable href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id} variant='secondary'>
 											{artist.name}
 										</Chip>
 									))}
