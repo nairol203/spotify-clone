@@ -116,8 +116,8 @@ export const Chip = styled.a<ChipProps>`
 
 	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
 		&:hover {
-			color: ${({ variant, theme, clickable }) => clickable && (variant === 'secondary' ? theme.colors.text : '#000')};
-			background-color: ${({ theme, variant, clickable }) => clickable && (variant === 'secondary' ? theme.colors.buttonHover : theme.colors.secondary)};
+			color: ${({ variant, theme, clickable }) => clickable && variant === 'secondary' && '#000'};
+			background-color: ${({ theme, variant, clickable }) => clickable && variant === 'secondary' && theme.colors.secondary};
 		}
 	}
 `;
