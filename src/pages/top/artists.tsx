@@ -1,22 +1,24 @@
-import { Card, Chip, Flex, Group, Placeholder, StyledTopPage } from '@components/styles/Core.styled';
+import { Card, Chip, Flex, Group, Placeholder } from '@components/styles/Core.styled';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import { useState } from 'react';
+import { SPOTIFY_RANGE } from 'src/server/routers/_app';
+import { z } from 'zod';
 
 export default function Home() {
-	const [range, setRange] = useState<'short_term' | 'medium_term' | 'long_term'>('short_term');
+	const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
 	const topTracks = trpc.topArtists.useQuery({ range });
 
 	if (!topTracks.data)
 		return (
-			<StyledTopPage>
+			<Flex direction='column' style={{ padding: '1em' }}>
 				<h1>Loading...</h1>
 				<Placeholder height='90vh' />
-			</StyledTopPage>
+			</Flex>
 		);
 
 	return (
-		<StyledTopPage>
+		<Flex direction='column' style={{ padding: '1em' }}>
 			<h1>Top Artists</h1>
 			<Group>
 				<Chip clickable onClick={() => setRange('short_term')} variant={range === 'short_term' ? 'primary' : 'secondary'}>
@@ -39,6 +41,6 @@ export default function Home() {
 					</Card>
 				))}
 			</Flex>
-		</StyledTopPage>
+		</Flex>
 	);
 }

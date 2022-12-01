@@ -3,12 +3,13 @@ import { z } from 'zod';
 import { procedure, router } from '../trpc';
 
 export const API_ENDPOINT = 'https://api.spotify.com/v1';
+export const SPOTIFY_RANGE = z.enum(['short_term', 'medium_term', 'long_term']);
 
 export const appRouter = router({
 	topTracks: procedure
 		.input(
 			z.object({
-				range: z.enum(['short_term', 'medium_term', 'long_term']),
+				range: SPOTIFY_RANGE,
 				limit: z.optional(z.string()),
 			})
 		)
@@ -28,7 +29,7 @@ export const appRouter = router({
 	topArtists: procedure
 		.input(
 			z.object({
-				range: z.enum(['short_term', 'medium_term', 'long_term']),
+				range: SPOTIFY_RANGE,
 				limit: z.optional(z.string()),
 			})
 		)

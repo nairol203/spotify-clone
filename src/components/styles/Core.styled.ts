@@ -33,6 +33,13 @@ interface PlaceholderProps {
 	height: string;
 }
 
+interface FlexProps {
+	justify?: 'space-between' | 'flex-start' | 'center' | 'space-around';
+	align?: 'space-between' | 'flex-start' | 'center';
+	direction?: 'column' | 'row' | 'column-reverse';
+	gap?: string;
+}
+
 export const Button = styled.button<ButtonProps>`
 	color: ${({ variant, theme }) => (!variant || variant === 'primary' ? '#fff' : theme.colors.text)};
 	background-color: ${({ theme, variant }) => (variant === 'secondary' ? theme.colors.tertiary : theme.colors.primary)};
@@ -171,20 +178,6 @@ export const Form = styled.form`
 	gap: 0.5em;
 	width: 100%;
 `;
-
-export const StyledTopPage = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
-	padding: 1em;
-`;
-
-interface FlexProps {
-	justify?: 'space-between' | 'flex-start' | 'center' | 'space-around';
-	align?: 'space-between' | 'flex-start' | 'center';
-	direction?: 'column' | 'row' | 'column-reverse';
-	gap?: string;
-}
 
 export const Flex = styled.div<FlexProps>`
 	display: flex;

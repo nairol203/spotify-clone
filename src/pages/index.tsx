@@ -1,4 +1,4 @@
-import { Card, Chip, Flex, Group, Placeholder, StyledTopPage } from '@components/styles/Core.styled';
+import { Card, Chip, Flex, Group, Placeholder } from '@components/styles/Core.styled';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 
@@ -19,21 +19,21 @@ export default function Home() {
 
 	if (!topTracks.data || !currentlyPlaying.data)
 		return (
-			<StyledTopPage>
+			<Flex direction='column' style={{ padding: '1em' }}>
 				<h1>Loading...</h1>
 				<Placeholder height='90vh' />
-			</StyledTopPage>
+			</Flex>
 		);
 	if (topTracks.error || currentlyPlaying.error)
 		return (
-			<StyledTopPage>
+			<Flex direction='column' style={{ padding: '1em' }}>
 				<h1>Error!</h1>
 				<Placeholder height='90vh' />
-			</StyledTopPage>
+			</Flex>
 		);
 
 	return (
-		<StyledTopPage>
+		<Flex direction='column' style={{ padding: '1em' }}>
 			{currentlyPlaying.data.is_playing && currentlyPlaying.data.currently_playing_type == 'track' && currentlyPlaying.data?.item && (
 				<>
 					<h1>Currently Playing</h1>
@@ -86,6 +86,6 @@ export default function Home() {
 					</Card>
 				))}
 			</div>
-		</StyledTopPage>
+		</Flex>
 	);
 }
