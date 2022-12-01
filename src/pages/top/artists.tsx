@@ -11,14 +11,14 @@ export default function Home() {
 
 	if (!topTracks.data)
 		return (
-			<Flex direction='column' style={{ padding: '1em' }}>
+			<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
 				<h1>Loading...</h1>
 				<Placeholder height='90vh' />
 			</Flex>
 		);
 
 	return (
-		<Flex direction='column' style={{ padding: '1em' }}>
+		<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
 			<h1>Top Artists</h1>
 			<Group>
 				<Chip clickable onClick={() => setRange('short_term')} variant={range === 'short_term' ? 'primary' : 'secondary'}>

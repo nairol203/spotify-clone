@@ -19,21 +19,14 @@ export default function Home() {
 
 	if (!topTracks.data || !currentlyPlaying.data)
 		return (
-			<Flex direction='column' style={{ padding: '1em' }}>
+			<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
 				<h1>Loading...</h1>
-				<Placeholder height='90vh' />
-			</Flex>
-		);
-	if (topTracks.error || currentlyPlaying.error)
-		return (
-			<Flex direction='column' style={{ padding: '1em' }}>
-				<h1>Error!</h1>
 				<Placeholder height='90vh' />
 			</Flex>
 		);
 
 	return (
-		<Flex direction='column' style={{ padding: '1em' }}>
+		<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
 			{currentlyPlaying.data.is_playing && currentlyPlaying.data.currently_playing_type == 'track' && currentlyPlaying.data?.item && (
 				<>
 					<h1>Currently Playing</h1>
