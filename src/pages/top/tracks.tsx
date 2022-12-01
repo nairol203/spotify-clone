@@ -1,4 +1,4 @@
-import { Placeholder, Group, Chip, Card, Flex } from '@components/styles/Core.styled';
+import { Placeholder, Group, Chip, Card, Flex, RadioChip } from '@components/styles/Core.styled';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -21,15 +21,15 @@ export default function Home() {
 		<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
 			<h1>Top Tracks</h1>
 			<Flex>
-				<Chip clickable onClick={() => setRange('short_term')} variant={range === 'short_term' ? 'primary' : 'secondary'}>
+				<RadioChip active={range === 'short_term'} clickable onClick={() => setRange('short_term')} variant={range === 'short_term' ? 'primary' : 'secondary'}>
 					4 Weeks
-				</Chip>
-				<Chip clickable onClick={() => setRange('medium_term')} variant={range === 'medium_term' ? 'primary' : 'secondary'}>
+				</RadioChip>
+				<RadioChip active={range === 'medium_term'} clickable onClick={() => setRange('medium_term')} variant={range === 'medium_term' ? 'primary' : 'secondary'}>
 					6 Months
-				</Chip>
-				<Chip clickable onClick={() => setRange('long_term')} variant={range === 'long_term' ? 'primary' : 'secondary'}>
+				</RadioChip>
+				<RadioChip active={range === 'long_term'} clickable onClick={() => setRange('long_term')} variant={range === 'long_term' ? 'primary' : 'secondary'}>
 					All time
-				</Chip>
+				</RadioChip>
 			</Flex>
 			<Flex direction='column' gap='1em'>
 				{topTracks.data.items.map(item => (

@@ -29,6 +29,10 @@ interface ChipProps {
 	withIcon?: boolean;
 }
 
+interface RadioChipProps extends ChipProps {
+	active: boolean;
+}
+
 interface PlaceholderProps {
 	height: string;
 }
@@ -116,8 +120,17 @@ export const Chip = styled.a<ChipProps>`
 
 	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
 		&:hover {
-			color: ${({ variant, theme, clickable }) => clickable && variant === 'secondary' && '#000'};
-			background-color: ${({ theme, variant, clickable }) => clickable && variant === 'secondary' && theme.colors.secondary};
+			color: ${({ variant, theme, clickable }) => clickable && (variant === 'secondary' ? theme.colors.text : '#000')};
+			background-color: ${({ theme, variant, clickable }) => clickable && (variant === 'secondary' ? theme.colors.buttonHover : theme.colors.secondary)};
+		}
+	}
+`;
+
+export const RadioChip = styled(Chip)<RadioChipProps>`
+	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
+		&:hover {
+			color: ${({ theme, active }) => !active && '#000'};
+			background-color: ${({ theme, active }) => !active && theme.colors.secondary};
 		}
 	}
 `;
