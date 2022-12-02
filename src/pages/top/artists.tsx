@@ -1,5 +1,5 @@
 import SkeletonCard from '@components/SkeletonCard';
-import { Card, Flex, RadioChip, Ranking } from '@components/styles/Core.styled';
+import { Card, Flex, RadioButton, Ranking } from '@components/styles/Core.styled';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -14,15 +14,15 @@ export default function Home() {
 		<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
 			<h1>Top Artists</h1>
 			<Flex>
-				<RadioChip active={range === 'short_term'} clickable onClick={() => setRange('short_term')} variant={range === 'short_term' ? 'primary' : 'secondary'}>
+				<RadioButton active={range === 'short_term'} onClick={() => setRange('short_term')} variant={range === 'short_term' ? 'primary' : 'secondary'}>
 					4 Weeks
-				</RadioChip>
-				<RadioChip active={range === 'medium_term'} clickable onClick={() => setRange('medium_term')} variant={range === 'medium_term' ? 'primary' : 'secondary'}>
+				</RadioButton>
+				<RadioButton active={range === 'medium_term'} onClick={() => setRange('medium_term')} variant={range === 'medium_term' ? 'primary' : 'secondary'}>
 					6 Months
-				</RadioChip>
-				<RadioChip active={range === 'long_term'} clickable onClick={() => setRange('long_term')} variant={range === 'long_term' ? 'primary' : 'secondary'}>
+				</RadioButton>
+				<RadioButton active={range === 'long_term'} onClick={() => setRange('long_term')} variant={range === 'long_term' ? 'primary' : 'secondary'}>
 					All time
-				</RadioChip>
+				</RadioButton>
 			</Flex>
 			<Flex direction='column' gap='1em'>
 				{topTracks.data ? (

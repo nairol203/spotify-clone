@@ -23,7 +23,7 @@ export default function Home() {
 									<h3>{item.track.name}</h3>
 									<Group>
 										{item.track.artists.map(artist => (
-											<Chip clickable href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id} variant='secondary'>
+											<Chip clickable href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id} variant='secondary' size='small'>
 												{artist.name}
 											</Chip>
 										))}
@@ -76,7 +76,7 @@ function CurrentlyPlaying() {
 							{
 								// @ts-expect-error
 								currentlyPlaying.data?.item?.artists.map(artist => (
-									<Chip clickable href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id} variant='secondary'>
+									<Chip clickable href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id} variant='secondary' size='small'>
 										{artist.name}
 									</Chip>
 								))
