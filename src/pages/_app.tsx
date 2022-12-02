@@ -27,6 +27,7 @@ function App({ Component, pageProps }: AppProps) {
 				<meta name='author' content='nairol203' />
 				<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 				<link rel='shortcut icon' href='/logo.png' />
+				<link rel='apple-touch-icon' sizes='192x192' href='/logo.png' />
 				<meta property='og:title' content='Nairol Spotify Stats' />
 				<meta property='og:image' content='/logo.png' />
 				<meta property='og:type' content='website' />
