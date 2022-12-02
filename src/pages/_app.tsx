@@ -4,12 +4,23 @@ import { trpc } from '@lib/trpc';
 import GlobalStyles from '@lib/global';
 import NavBar from '@components/NavBar';
 import Footer from '@components/Footer';
-import { darkMode } from '@lib/themes';
+import { darkMode, lightMode } from '@lib/themes';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 function App({ Component, pageProps }: AppProps) {
+	const [theme, setTheme] = useState<string | null>(null);
+
+	useEffect(() => {
+		const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		setTheme(darkModeQuery.matches ? 'dark' : 'light');
+		darkModeQuery.addEventListener('change', event => {
+			setTheme(event.matches ? 'dark' : 'light');
+		});
+	}, [theme]);
+
 	return (
-		<ThemeProvider theme={darkMode}>
+		<ThemeProvider theme={theme === 'light' ? lightMode : darkMode}>
 			<Head>
 				<title>Nairol Spotify Stats</title>
 				<meta name='description' content='Nairol Spotify Stats kann die Top Tracks, Top Artists und die kürzlich gespielten Songs anzeigen.' />
@@ -30,9 +41,13 @@ function App({ Component, pageProps }: AppProps) {
 				<meta name='twitter:card' content='summary' />
 			</Head>
 			<GlobalStyles />
-			<NavBar />
-			<Component {...pageProps} />
-			<Footer />
+			{theme && (
+				<>
+					<NavBar />
+					<Component {...pageProps} />
+					<Footer />
+				</>
+			)}
 		</ThemeProvider>
 	);
 }
