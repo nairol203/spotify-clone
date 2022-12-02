@@ -45,7 +45,7 @@ export default function Home() {
 function CurrentlyPlaying() {
 	const currentlyPlaying = trpc.currentlyPlaying.useQuery();
 
-	if (!currentlyPlaying.data) return <></>;
+	if (!currentlyPlaying.data || !currentlyPlaying.data.is_playing || currentlyPlaying.data.currently_playing_type !== 'track') return <></>;
 
 	return (
 		<>
