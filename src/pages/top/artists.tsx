@@ -1,4 +1,5 @@
-import { Card, Chip, Flex, Group, Placeholder, RadioChip } from '@components/styles/Core.styled';
+import SkeletonCard from '@components/SkeletonCard';
+import { Card, Flex, RadioChip, Ranking } from '@components/styles/Core.styled';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -8,14 +9,6 @@ import { z } from 'zod';
 export default function Home() {
 	const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
 	const topTracks = trpc.topArtists.useQuery({ range });
-
-	if (!topTracks.data)
-		return (
-			<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
-				<h1>Loading...</h1>
-				<Placeholder height='90vh' />
-			</Flex>
-		);
 
 	return (
 		<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
@@ -32,16 +25,29 @@ export default function Home() {
 				</RadioChip>
 			</Flex>
 			<Flex direction='column' gap='1em'>
-				{topTracks.data.items.map((item, index) => (
-					<Card key={item.id}>
-						<Flex gap='1em' align='center'>
-							<a style={{ display: 'flex', justifyContent: 'center' }} href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
-								<Image src={item.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
-							</a>
-							<h3>{item.name}</h3>
-						</Flex>
-					</Card>
-				))}
+				{topTracks.data ? (
+					topTracks.data.items.map((item, index) => (
+						<Card key={item.id}>
+							<Flex gap='1em' align='center'>
+								<Ranking>{index + 1}</Ranking>
+								<a style={{ display: 'flex', justifyContent: 'center' }} href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
+									<Image src={item.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
+								</a>
+								<h3>{item.name}</h3>
+							</Flex>
+						</Card>
+					))
+				) : (
+					<>
+						<SkeletonCard />
+						<SkeletonCard />
+						<SkeletonCard />
+						<SkeletonCard />
+						<SkeletonCard />
+						<SkeletonCard />
+						<SkeletonCard />
+					</>
+				)}
 			</Flex>
 		</Flex>
 	);

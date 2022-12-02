@@ -1,4 +1,5 @@
-import { Placeholder, Group, Chip, Card, Flex, RadioChip } from '@components/styles/Core.styled';
+import SkeletonCard from '@components/SkeletonCard';
+import { Group, Chip, Card, Flex, RadioChip, Ranking } from '@components/styles/Core.styled';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -8,14 +9,6 @@ import { z } from 'zod';
 export default function Home() {
 	const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
 	const topTracks = trpc.topTracks.useQuery({ range });
-
-	if (!topTracks.data)
-		return (
-			<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
-				<h1>Loading...</h1>
-				<Placeholder height='90vh' />
-			</Flex>
-		);
 
 	return (
 		<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
@@ -32,25 +25,38 @@ export default function Home() {
 				</RadioChip>
 			</Flex>
 			<Flex direction='column' gap='1em'>
-				{topTracks.data.items.map(item => (
-					<Card key={item.id}>
-						<Flex gap='1em' align='center'>
-							<a style={{ display: 'flex', justifyContent: 'center' }} href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
-								<Image src={item.album.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
-							</a>
-							<Flex gap='.25em' direction='column'>
-								<h3>{item.name}</h3>
-								<Group className='artists'>
-									{item.artists.map(artist => (
-										<Chip clickable href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id} variant='secondary'>
-											{artist.name}
-										</Chip>
-									))}
-								</Group>
+				{topTracks.data ? (
+					topTracks.data.items.map((item, index) => (
+						<Card key={item.id}>
+							<Flex gap='1em' align='center'>
+								<Ranking>{index + 1}</Ranking>
+								<a style={{ display: 'flex', justifyContent: 'center' }} href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
+									<Image src={item.album.images[0].url} height={75} width={75} alt='Album Cover' style={{ borderRadius: '0.25em' }} />
+								</a>
+								<Flex gap='.25em' direction='column'>
+									<h3>{item.name}</h3>
+									<Group className='artists'>
+										{item.artists.map(artist => (
+											<Chip clickable href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id} variant='secondary'>
+												{artist.name}
+											</Chip>
+										))}
+									</Group>
+								</Flex>
 							</Flex>
-						</Flex>
-					</Card>
-				))}
+						</Card>
+					))
+				) : (
+					<>
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+					</>
+				)}
 			</Flex>
 		</Flex>
 	);

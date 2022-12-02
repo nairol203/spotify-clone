@@ -95,7 +95,7 @@ export const Card = styled.div<CardProps>`
 	flex-direction: column;
 	gap: 1em;
 	background-color: ${({ theme }) => theme.colors.card};
-	padding: 1.5em;
+	padding: 1em;
 	border-radius: 0.5em;
 	box-shadow: 0 0 0.1em rgb(0 0 0 / 0.5);
 	max-width: ${({ maxWidth }) => maxWidth};
@@ -198,4 +198,37 @@ export const Flex = styled.div<FlexProps>`
 	gap: ${({ gap }) => gap || '.5em'};
 	justify-content: ${({ justify }) => justify};
 	align-items: ${({ align }) => align};
+`;
+
+export const Ranking = styled.div`
+	display: flex;
+	align-items: center;
+	background-color: ${({ theme }) => theme.colors.tertiary};
+	justify-content: center;
+	border-radius: 50%;
+	height: 40px;
+	aspect-ratio: 1;
+	font-weight: 600;
+`;
+
+interface SkeletonProps {
+	height?: string;
+	width?: string;
+	circle?: boolean;
+}
+
+export const Skeleton = styled.div<SkeletonProps>`
+	height: ${({ height }) => height};
+	width: ${({ width }) => width};
+	border-radius: ${({ circle }) => (circle ? '50%' : '0.25em')};
+	position: relative;
+	overflow: hidden;
+
+	&::before {
+		content: '';
+		position: absolute;
+		background: ${({ theme }) => theme.colors.tertiary};
+		inset: 0px;
+		z-index: 10;
+	}
 `;
