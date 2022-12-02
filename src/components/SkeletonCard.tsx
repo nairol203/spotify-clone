@@ -17,7 +17,7 @@ export default function SkeletonCard({ withArtist }: SkeletonCardProps) {
 					{withArtist && (
 						<Group>
 							<Skeleton>
-								<Chip>lorem</Chip>
+								<Chip size='small'>lorem</Chip>
 							</Skeleton>
 						</Group>
 					)}
