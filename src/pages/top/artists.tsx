@@ -39,13 +39,13 @@ export default function Home() {
 					))
 				) : (
 					<>
-						<SkeletonCard />
-						<SkeletonCard />
-						<SkeletonCard />
-						<SkeletonCard />
-						<SkeletonCard />
-						<SkeletonCard />
-						<SkeletonCard />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
 					</>
 				)}
 			</Flex>
