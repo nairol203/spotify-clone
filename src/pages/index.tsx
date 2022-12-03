@@ -11,7 +11,7 @@ export default function Home() {
 			<h1>Spotify Stats</h1>
 			<CurrentlyPlaying />
 			<h2>Recently Played</h2>
-			<div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '1em 0 5em' }}>
 				{topTracks.data ? (
 					topTracks.data.items.map(item => (
 						<Card key={item.track.id}>

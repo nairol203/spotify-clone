@@ -11,7 +11,7 @@ export default function Home() {
 	const topTracks = trpc.topArtists.useQuery({ range });
 
 	return (
-		<Flex direction='column' gap='1em'>
+		<Flex direction='column' gap='1em' style={{ padding: '1em 0 5em' }}>
 			<h1>Top Artists</h1>
 			<Flex>
 				<RadioButton active={range === 'short_term'} onClick={() => setRange('short_term')} variant={range === 'short_term' ? 'primary' : 'secondary'}>
