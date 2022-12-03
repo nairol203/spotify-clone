@@ -7,7 +7,7 @@ export default function Home() {
 	const topTracks = trpc.recentlyPlayed.useQuery();
 
 	return (
-		<Flex direction='column' gap='1em' style={{ padding: '1em' }}>
+		<Flex direction='column' gap='1em'>
 			<h1>Spotify Stats</h1>
 			<CurrentlyPlaying />
 			<h2>Recently Played</h2>
