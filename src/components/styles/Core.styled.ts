@@ -173,7 +173,7 @@ export const Main = styled.main`
 	margin: 0 1em;
 
 	@media (min-width: 1800px) {
-		max-width: 1920px;
+		max-width: 1800px;
 		margin: 0 auto;
 	}
 `;
