@@ -7,11 +7,11 @@ export default function Home() {
 	const topTracks = trpc.recentlyPlayed.useQuery();
 
 	return (
-		<Flex direction='column' gap='1em'>
+		<Flex direction='column' gap='1em' style={{ padding: '1em 0 5em' }}>
 			<h1>Spotify Stats</h1>
 			<CurrentlyPlaying />
 			<h2>Recently Played</h2>
-			<div style={{ display: 'flex', flexDirection: 'column', gap: '1em 0 5em' }}>
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
 				{topTracks.data ? (
 					topTracks.data.items.map(item => (
 						<Card key={item.track.id}>
