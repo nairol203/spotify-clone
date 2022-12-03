@@ -41,6 +41,9 @@ export default function Home() {
 						<SkeletonCard withArtist />
 						<SkeletonCard withArtist />
 						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
+						<SkeletonCard withArtist />
 					</>
 				)}
 			</div>

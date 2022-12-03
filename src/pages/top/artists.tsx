@@ -46,6 +46,9 @@ export default function Home() {
 						<SkeletonCard withRanking />
 						<SkeletonCard withRanking />
 						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
+						<SkeletonCard withRanking />
 					</>
 				)}
 			</Flex>
