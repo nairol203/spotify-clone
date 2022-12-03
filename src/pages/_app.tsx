@@ -7,6 +7,7 @@ import Footer from '@components/Footer';
 import { darkMode, lightMode } from '@lib/themes';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import { Main } from '@components/styles/Core.styled';
 
 function App({ Component, pageProps }: AppProps) {
 	const [theme, setTheme] = useState<string | null>(null);
@@ -46,7 +47,9 @@ function App({ Component, pageProps }: AppProps) {
 			{theme && (
 				<>
 					<NavBar />
-					<Component {...pageProps} />
+					<Main>
+						<Component {...pageProps} />
+					</Main>
 					<Footer />
 				</>
 			)}
