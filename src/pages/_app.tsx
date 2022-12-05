@@ -7,6 +7,7 @@ import Footer from '@components/Footer';
 import { darkMode, lightMode } from '@lib/themes';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import { Main } from '@components/styles/Core.styled';
 
 function App({ Component, pageProps }: AppProps) {
 	const [theme, setTheme] = useState<string | null>(null);
@@ -22,11 +23,13 @@ function App({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProvider theme={theme === 'light' ? lightMode : darkMode}>
 			<Head>
+				<link rel='icon' href='/logo.png' />
 				<title>Nairol Spotify Stats</title>
 				<meta name='description' content='Nairol Spotify Stats kann die Top Tracks, Top Artists und die kürzlich gespielten Songs anzeigen.' />
 				<meta name='author' content='nairol203' />
 				<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 				<link rel='shortcut icon' href='/logo.png' />
+				<link rel='apple-touch-icon' sizes='192x192' href='/logo.png' />
 				<meta property='og:title' content='Nairol Spotify Stats' />
 				<meta property='og:image' content='/logo.png' />
 				<meta property='og:type' content='website' />
@@ -44,7 +47,9 @@ function App({ Component, pageProps }: AppProps) {
 			{theme && (
 				<>
 					<NavBar />
-					<Component {...pageProps} />
+					<Main>
+						<Component {...pageProps} />
+					</Main>
 					<Footer />
 				</>
 			)}

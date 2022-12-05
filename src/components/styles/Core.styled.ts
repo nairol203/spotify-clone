@@ -5,6 +5,10 @@ interface ButtonProps {
 	size?: 'normal' | 'big';
 }
 
+interface RadioButtonProps extends ButtonProps {
+	active: boolean;
+}
+
 interface CardProps {
 	maxWidth?: string;
 }
@@ -20,17 +24,13 @@ interface GroupProps {
 	direction?: 'column' | 'row' | 'column-reverse';
 	gap?: string;
 	nowrap?: boolean;
-	clickable?: boolean;
 }
 
 interface ChipProps {
 	variant?: 'primary' | 'secondary';
-	clickable?: boolean;
 	withIcon?: boolean;
-}
-
-interface RadioChipProps extends ChipProps {
-	active: boolean;
+	size?: 'small' | 'medium';
+	clickable?: boolean;
 }
 
 interface PlaceholderProps {
@@ -42,6 +42,12 @@ interface FlexProps {
 	align?: 'space-between' | 'flex-start' | 'center';
 	direction?: 'column' | 'row' | 'column-reverse';
 	gap?: string;
+}
+
+interface SkeletonProps {
+	height?: string;
+	width?: string;
+	circle?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -72,6 +78,15 @@ export const Button = styled.button<ButtonProps>`
 	}
 `;
 
+export const RadioButton = styled(Button)<RadioButtonProps>`
+	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
+		&:hover {
+			color: ${({ theme }) => theme.colors.text};
+			background-color: ${({ theme, active }) => (active ? theme.colors.primary : theme.colors.buttonHover)};
+		}
+	}
+`;
+
 export const Text = styled.span<TextProps>`
 	font-size: ${({ size }) => size};
 	text-align: ${({ align }) => align};
@@ -84,10 +99,6 @@ export const Group = styled.div<GroupProps>`
 	gap: ${({ gap }) => gap || '.5em'};
 	justify-content: ${({ justify }) => justify};
 	align-items: ${({ align }) => align};
-	cursor: ${({ clickable }) => clickable && 'pointer'};
-
-	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
-	}
 `;
 
 export const Card = styled.div<CardProps>`
@@ -95,7 +106,7 @@ export const Card = styled.div<CardProps>`
 	flex-direction: column;
 	gap: 1em;
 	background-color: ${({ theme }) => theme.colors.card};
-	padding: 1.5em;
+	padding: 1em;
 	border-radius: 0.5em;
 	box-shadow: 0 0 0.1em rgb(0 0 0 / 0.5);
 	max-width: ${({ maxWidth }) => maxWidth};
@@ -106,31 +117,20 @@ export const Card = styled.div<CardProps>`
 `;
 
 export const Chip = styled.a<ChipProps>`
-	color: ${({ variant, theme }) => (!variant || variant === 'primary' ? '#fff' : theme.colors.text)};
-	background-color: ${({ theme, variant }) => (variant === 'secondary' ? theme.colors.tertiary : theme.colors.primary)};
-	padding: 0.2em 0.5em 0.2em 0.5em;
-	border-radius: 0.25em;
-	box-shadow: 0 0 0.1em rgb(0 0 0 / 0.5);
-	cursor: ${({ clickable }) => clickable && 'pointer'};
-	height: 2em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: all 500ms ease;
+	color: ${({ variant, theme }) => (!variant || variant === 'primary' ? '#fff' : theme.colors.text)};
+	background-color: ${({ theme, variant }) => (variant === 'secondary' ? theme.colors.tertiary : theme.colors.primary)};
+	padding: 0.2em 0.5em;
+	border-radius: 0.25em;
+	box-shadow: 0 0 0.1em rgb(0 0 0 / 0.5);
+	font-size: ${({ size }) => (size == 'small' ? '13px' : '1em')};
 
 	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
 		&:hover {
 			color: ${({ variant, theme, clickable }) => clickable && (variant === 'secondary' ? theme.colors.text : '#000')};
 			background-color: ${({ theme, variant, clickable }) => clickable && (variant === 'secondary' ? theme.colors.buttonHover : theme.colors.secondary)};
-		}
-	}
-`;
-
-export const RadioChip = styled(Chip)<RadioChipProps>`
-	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
-		&:hover {
-			color: ${({ theme, active }) => (active ? theme.colors.text : '#000')};
-			background-color: ${({ theme, active }) => (active ? theme.colors.primary : theme.colors.secondary)};
 		}
 	}
 `;
@@ -173,7 +173,7 @@ export const Main = styled.main`
 	margin: 0 1em;
 
 	@media (min-width: 1800px) {
-		max-width: 1920px;
+		max-width: 1800px;
 		margin: 0 auto;
 	}
 `;
@@ -198,4 +198,31 @@ export const Flex = styled.div<FlexProps>`
 	gap: ${({ gap }) => gap || '.5em'};
 	justify-content: ${({ justify }) => justify};
 	align-items: ${({ align }) => align};
+`;
+
+export const Ranking = styled.div`
+	display: flex;
+	align-items: center;
+	background-color: ${({ theme }) => theme.colors.tertiary};
+	justify-content: center;
+	border-radius: 50%;
+	height: 40px;
+	aspect-ratio: 1;
+	font-weight: 600;
+`;
+
+export const Skeleton = styled.div<SkeletonProps>`
+	height: ${({ height }) => height};
+	width: ${({ width }) => width};
+	border-radius: ${({ circle }) => (circle ? '50%' : '0.25em')};
+	position: relative;
+	overflow: hidden;
+
+	&::before {
+		content: '';
+		position: absolute;
+		background: ${({ theme }) => theme.colors.tertiary};
+		inset: 0px;
+		z-index: 10;
+	}
 `;
