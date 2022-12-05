@@ -48,13 +48,13 @@ export default function NavBar() {
 	const isDesktop = useMediaQuery(`(min-width: ${theme.mobile.threshold})`);
 
 	const navLinks = [
-		<Link className={router.pathname == '/' ? 'active' : ''} href='/'>
+		<Link key={0} className={router.pathname == '/' ? 'active' : ''} href='/'>
 			Home
 		</Link>,
-		<Link className={router.pathname == '/top/artists' ? 'active' : ''} href='/top/artists'>
+		<Link key={1} className={router.pathname == '/top/artists' ? 'active' : ''} href='/top/artists'>
 			Top Artists
 		</Link>,
-		<Link className={router.pathname == '/top/tracks' ? 'active' : ''} href='/top/tracks'>
+		<Link key={2} className={router.pathname == '/top/tracks' ? 'active' : ''} href='/top/tracks'>
 			Top Tracks
 		</Link>,
 	];
