@@ -81,7 +81,7 @@ export const Button = styled.button<ButtonProps>`
 export const RadioButton = styled(Button)<RadioButtonProps>`
 	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
 		&:hover {
-			color: ${({ theme }) => theme.colors.text};
+			color: ${({ theme, active }) => (active ? 'white' : theme.colors.text)};
 			background-color: ${({ theme, active }) => (active ? theme.colors.primary : theme.colors.buttonHover)};
 		}
 	}
