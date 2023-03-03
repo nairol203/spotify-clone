@@ -12,26 +12,20 @@ export default function Home() {
             <h2>Recently Played</h2>
             <div className='grid gap-4'>
                 {topTracks.data &&
-                    topTracks.data.items.map((item) => (
-                        <div className='flex justify-between gap-2 items-center'>
-                            <div className='flex items-center gap-4' key={item.track.id}>
+                    topTracks.data.items.map((item, index) => (
+                        <div className='flex items-center justify-between gap-2' key={item.track.id + index}>
+                            <div className='flex items-center gap-4'>
                                 <a href={item.track.external_urls.spotify} target='_blank' rel='noreferrer'>
                                     <Image className='aspect-square rounded-sm' src={item.track.album.images[0].url} height={50} width={50} alt='Album Cover' />
                                 </a>
                                 <div>
                                     <h3>{item.track.name}</h3>
-                                    <div className='flex flex-wrap gap-1 items-center'>
+                                    <div className='flex flex-wrap items-center gap-1'>
                                         {item.track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
 
                                         {item.track.artists.map((artist, index) => (
-                                            <div>
-                                                <a
-                                                    className='text-sm hover:underline dark:text-gray-300'
-                                                    href={artist.external_urls.spotify}
-                                                    target='_blank'
-                                                    rel='noreferrer'
-                                                    key={artist.id}
-                                                >
+                                            <div key={artist.id + index}>
+                                                <a className='text-sm hover:underline dark:text-gray-300' href={artist.external_urls.spotify} target='_blank' rel='noreferrer'>
                                                     {artist.name}
                                                 </a>
                                                 {index < item.track.artists.length - 1 && ','}
@@ -56,7 +50,7 @@ function CurrentlyPlaying() {
     return (
         <div className='grid gap-4'>
             <h2>Currently Playing</h2>
-            <div className='flex justify-between gap-2 items-center'>
+            <div className='flex items-center justify-between gap-2'>
                 <div className='flex items-center gap-4'>
                     <a href={currentlyPlaying.data.item?.external_urls.spotify} target='_blank' rel='noreferrer'>
                         <Image
@@ -72,19 +66,13 @@ function CurrentlyPlaying() {
                     </a>
                     <div>
                         <h3>{currentlyPlaying.data?.item?.name}</h3>
-                        <div className='flex flex-wrap gap-1 items-center'>
+                        <div className='flex flex-wrap items-center gap-1'>
                             {currentlyPlaying.data?.item?.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
                             {
                                 // @ts-expect-error
                                 currentlyPlaying.data?.item?.artists.map((artist, index) => (
-                                    <div>
-                                        <a
-                                            className='text-sm hover:underline dark:text-gray-300'
-                                            href={artist.external_urls.spotify}
-                                            target='_blank'
-                                            rel='noreferrer'
-                                            key={artist.id}
-                                        >
+                                    <div key={artist.id + index}>
+                                        <a className='text-sm hover:underline dark:text-gray-300' href={artist.external_urls.spotify} target='_blank' rel='noreferrer'>
                                             {artist.name}
                                         </a>
                                         {

@@ -29,7 +29,7 @@ export default function Home() {
             <div className='grid gap-4'>
                 {topTracks.data &&
                     topTracks.data.items.map((item, index) => (
-                        <div className='flex justify-between gap-2 items-center'>
+                        <div className='flex justify-between gap-2 items-center' key={item.id + index}>
                             <div className='flex items-center gap-4' key={item.id}>
                                 <div className='flex w-5 justify-center'>{index + 1}</div>
                                 <a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
@@ -40,7 +40,7 @@ export default function Home() {
                                     <div className='flex flex-wrap items-center gap-1'>
                                         {item.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
                                         {item.artists.map((artist, index) => (
-                                            <div>
+                                            <div key={artist.id + index}>
                                                 <a
                                                     className='text-sm hover:underline dark:text-gray-300'
                                                     href={artist.external_urls.spotify}
