@@ -1,6 +1,9 @@
+import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trpc } from '@lib/trpc';
+import useAudio from '@lib/useAudio';
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
 import { z } from 'zod';
 import { SkeletonObject } from '..';
@@ -9,6 +12,8 @@ import { msToString } from '../../lib/helpers';
 export default function Home() {
     const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
     const topTracks = trpc.topTracks.useQuery({ range });
+    const [active, setActive] = useState<string | null>(null);
+    const { playing, toggle } = useAudio();
 
     return (
         <div className='grid gap-4 py-4'>
@@ -27,12 +32,22 @@ export default function Home() {
                     All time
                 </button>
             </div>
-            <div className='grid gap-4'>
+            <div>
                 {topTracks.data ? (
                     topTracks.data.items.map((item, index) => (
-                        <div className='flex items-center justify-between gap-2' key={item.id + index}>
+                        <div
+                            className='flex items-center justify-between gap-2 rounded-[4px] p-3 hover:bg-black hover:bg-opacity-10 hover:dark:bg-white'
+                            key={item.id + index}
+                            onMouseEnter={() => setActive(item.id)}
+                            onMouseLeave={() => setActive(null)}
+                        >
                             <div className='flex items-center gap-4' key={item.id}>
-                                <div className='flex w-5 justify-center'>{index + 1}</div>
+                                <div className='relative'>
+                                    <span className={`${active === item.id && 'absolute hidden'} flex w-5 justify-center`}>{index + 1}</span>
+                                    <button className={`${active !== item.id && 'absolute hidden'}`} onClick={() => toggle(item.preview_url)}>
+                                        <FontAwesomeIcon icon={playing ? faPause : faPlay} width={20} height={20} />
+                                    </button>
+                                </div>
                                 <a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
                                     <Image className='aspect-square rounded-sm' src={item.album.images[0].url} height={50} width={50} alt='Album Cover' />
                                 </a>
@@ -57,7 +72,7 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <span>{msToString(item.duration_ms)}</span>
+                            <span className='sm:mr-2'>{msToString(item.duration_ms)}</span>
                         </div>
                     ))
                 ) : (
