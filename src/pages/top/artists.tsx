@@ -26,10 +26,10 @@ export default function Home() {
                     All time
                 </button>
             </div>
-            <div className='grid gap-4'>
+            <div>
                 {topTracks.data ? (
                     topTracks.data.items.map((item, index) => (
-                        <div className='flex items-center gap-4' key={item.id}>
+                        <div className='flex items-center gap-4 rounded-[4px] p-3 hover:bg-black hover:bg-opacity-10 hover:dark:bg-white' key={item.id}>
                             <div className='flex w-5 justify-center'>{index + 1}</div>
                             <a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
                                 <Image className='aspect-square rounded-sm' src={item.images[0].url} height={50} width={50} alt='Album Cover' />
