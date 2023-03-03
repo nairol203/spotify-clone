@@ -11,7 +11,7 @@ export default function Home() {
             <CurrentlyPlaying />
             <h2>Recently Played</h2>
             <div className='grid gap-4'>
-                {topTracks.data &&
+                {topTracks.data ? (
                     topTracks.data.items.map((item, index) => (
                         <div className='flex items-center justify-between gap-2' key={item.track.id + index}>
                             <div className='flex items-center gap-4'>
@@ -36,11 +36,52 @@ export default function Home() {
                             </div>
                             <span>{msToString(item.track.duration_ms)}</span>
                         </div>
-                    ))}
+                    ))
+                ) : (
+                    <>
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                        <SkeletonObject type='track' />
+                    </>
+                )}
             </div>
         </div>
     );
 }
+
+export const SkeletonObject: React.FC<{ type: 'track' | 'album'; ranking?: boolean }> = ({ type, ranking }) => {
+    return (
+        <div className='flex items-center justify-between gap-2'>
+            <div className='flex items-center gap-4'>
+                {ranking && <div className='skeleton flex w-5 justify-center'>1</div>}
+                <div className='skeleton h-[50px] w-[50px]'></div>
+                <div>
+                    <h3 className='skeleton'>Lorem, ipsum.</h3>
+                    {type === 'track' && (
+                        <div className='flex flex-wrap items-center gap-1'>
+                            <div>
+                                <a className='skeleton text-sm hover:underline dark:text-gray-300'>Lorem, ipsum.</a>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+            {type === 'track' && <span className='skeleton'>Lorem.</span>}
+        </div>
+    );
+};
 
 function CurrentlyPlaying() {
     const currentlyPlaying = trpc.currentlyPlaying.useQuery();

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
 import { z } from 'zod';
+import { SkeletonObject } from '..';
 
 export default function Home() {
     const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
@@ -26,7 +27,7 @@ export default function Home() {
                 </button>
             </div>
             <div className='grid gap-4'>
-                {topTracks.data &&
+                {topTracks.data ? (
                     topTracks.data.items.map((item, index) => (
                         <div className='flex items-center gap-4' key={item.id}>
                             <div className='flex w-5 justify-center'>{index + 1}</div>
@@ -35,7 +36,26 @@ export default function Home() {
                             </a>
                             <h3>{item.name}</h3>
                         </div>
-                    ))}
+                    ))
+                ) : (
+                    <>
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                        <SkeletonObject type='album' ranking />
+                    </>
+                )}
             </div>
         </div>
     );

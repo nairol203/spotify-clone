@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
 import { z } from 'zod';
+import { SkeletonObject } from '..';
 import { msToString } from '../../lib/helpers';
 
 export default function Home() {
@@ -27,9 +28,9 @@ export default function Home() {
                 </button>
             </div>
             <div className='grid gap-4'>
-                {topTracks.data &&
+                {topTracks.data ? (
                     topTracks.data.items.map((item, index) => (
-                        <div className='flex justify-between gap-2 items-center' key={item.id + index}>
+                        <div className='flex items-center justify-between gap-2' key={item.id + index}>
                             <div className='flex items-center gap-4' key={item.id}>
                                 <div className='flex w-5 justify-center'>{index + 1}</div>
                                 <a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
@@ -58,7 +59,26 @@ export default function Home() {
                             </div>
                             <span>{msToString(item.duration_ms)}</span>
                         </div>
-                    ))}
+                    ))
+                ) : (
+                    <>
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                    </>
+                )}
             </div>
         </div>
     );
