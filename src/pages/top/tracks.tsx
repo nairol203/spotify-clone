@@ -36,7 +36,7 @@ export default function Home() {
 				{topTracks.data ? (
 					topTracks.data.items.map((item, index) => (
 						<div
-							className='flex items-center justify-between gap-2 rounded-[4px] p-3 hover:bg-black hover:bg-opacity-10 hover:dark:bg-white hover:dark:bg-opacity-10'
+							className='flex items-center justify-between gap-2 rounded-[4px] px-4 py-2 hover:bg-black hover:bg-opacity-10 hover:dark:bg-white hover:dark:bg-opacity-10'
 							key={item.id + index}
 							onMouseEnter={() => setActive(item.id)}
 							onMouseLeave={() => setActive(null)}
