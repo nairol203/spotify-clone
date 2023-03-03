@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    ::-webkit-scrollbar {
+        width: 16px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border: 4px solid transparent;
+        background: rgb(170, 170, 170);
+        background-clip: content-box;
+        border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        border: 4px solid transparent;
+        background: rgb(100, 100, 100);
+        background-clip: content-box;
+        border-radius: 8px;
+    }
+
+    svg {
+        fill: currentColor;
+        @apply text-text dark:text-darkMode-text;
+    }
+
+    body {
+        @apply bg-background text-text accent-secondary dark:bg-darkMode-background dark:text-darkMode-text;
+    }
+
+    h1,
+    .h1 {
+        @apply font-sans text-2xl;
+    }
+
+    h2,
+    .h2 {
+        @apply font-sans text-xl;
+    }
+
+    h3,
+    .h3 {
+        @apply font-sans text-lg;
+    }
+
+    h4,
+    .h4 {
+        @apply font-sans text-base;
+    }
+}
+
+@layer components {
+    .skeleton {
+        @apply relative animate-pulse before:absolute before:inset-0 before:rounded-md before:bg-tertiary dark:before:bg-darkMode-tertiary;
+    }
+    .primary-button {
+        @apply rounded-md bg-primary py-1.5 px-3 text-sm text-white duration-200 ease-in hover:bg-secondary disabled:cursor-not-allowed disabled:text-opacity-40 disabled:hover:bg-primary;
+    }
+    .secondary-button {
+        @apply rounded-md bg-card py-1.5 px-3 text-sm text-text duration-200 ease-in hover:bg-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-tertiary dark:bg-darkMode-tertiary dark:text-darkMode-text dark:hover:bg-darkMode-hover dark:disabled:hover:bg-darkMode-tertiary;
+    }
+}

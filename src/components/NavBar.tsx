@@ -1,73 +1,24 @@
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useMediaQuery } from '@mantine/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styled, { useTheme } from 'styled-components';
-import Dropdown from './core/Dropdown';
-import { Flex } from './styles/Core.styled';
-
-const StyledNavBar = styled.nav`
-	display: flex;
-	position: fixed;
-	top: 0;
-	z-index: 5;
-	width: 100%;
-	height: ${({ theme }) => theme.navBarHeight};
-	background-color: ${({ theme }) => theme.colors.card};
-	padding: 0 1em;
-	box-shadow: 0 0 4px rgb(0 0 0 / 0.4);
-	align-items: center;
-	justify-content: space-between;
-
-	a {
-		display: flex;
-		align-items: center;
-		gap: 1em;
-		font-size: 1.3em;
-		font-weight: 600;
-	}
-
-	a.active,
-	a:hover {
-		text-decoration: underline;
-	}
-
-	@media (min-width: ${({ theme }) => theme.mobile.threshold}) {
-		img:hover {
-			filter: brightness(1.15);
-			transition: 500ms ease;
-		}
-	}
-`;
 
 export default function NavBar() {
-	const router = useRouter();
-	const theme = useTheme();
-	const isDesktop = useMediaQuery(`(min-width: ${theme.mobile.threshold})`);
+    const router = useRouter();
 
-	const navLinks = [
-		<Link key={0} className={router.pathname == '/' ? 'active' : ''} href='/'>
-			Home
-		</Link>,
-		<Link key={1} className={router.pathname == '/top/artists' ? 'active' : ''} href='/top/artists'>
-			Top Artists
-		</Link>,
-		<Link key={2} className={router.pathname == '/top/tracks' ? 'active' : ''} href='/top/tracks'>
-			Top Tracks
-		</Link>,
-	];
-
-	return (
-		<StyledNavBar>
-			<Flex gap='2.5em'>
-				<Link href='/'>
-					<Image src='/logo.png' alt='Logo von Nairol Price Check' width={40} height={40} />
-				</Link>
-				{isDesktop && navLinks}
-			</Flex>
-			{!isDesktop && <Dropdown trigger={<FontAwesomeIcon icon={faBars} width={30} height={30} />} menu={navLinks} />}
-		</StyledNavBar>
-	);
+    return (
+        <nav className='fixed top-0 z-10 flex h-14 md:h-12 w-full items-center gap-8 bg-card px-4 shadow-sm dark:bg-darkMode-card'>
+            <Link href='/'>
+                <Image
+                    src='/logo.png'
+                    alt='Logo von Nairol Price Check'
+                    width={30}
+                    height={30}
+                    className='md:hover:underline md:hover:underline-offset-4 md:hover:brightness-110'
+                />
+            </Link>
+            <Link className={`${router.pathname === '/' ? 'underline' : 'hover:opacity-70'} decoration-1 underline-offset-8 hover:underline`} href='/'>Home</Link>
+            <Link className={`${router.pathname === '/top/artists' ? 'underline' : 'hover:opacity-70'} decoration-1 underline-offset-8 hover:underline`} href='/top/artists'>Top Artists</Link>
+            <Link className={`${router.pathname === '/top/tracks' ? 'underline' : 'hover:opacity-70'} decoration-1 underline-offset-8 hover:underline`} href='/top/tracks'>Top Tracks</Link>
+        </nav>
+    );
 }
