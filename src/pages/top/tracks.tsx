@@ -36,13 +36,13 @@ export default function Home() {
 				{topTracks.data ? (
 					topTracks.data.items.map((item, index) => (
 						<div
-							className='flex items-center justify-between gap-2 rounded-[4px] px-4 py-2 hover:bg-black hover:bg-opacity-10 hover:dark:bg-white hover:dark:bg-opacity-10'
+							className='flex  items-center justify-between gap-2 rounded-[4px] px-4 py-2 hover:bg-black hover:bg-opacity-10 hover:dark:bg-white hover:dark:bg-opacity-10'
 							key={item.id + index}
 							onMouseEnter={() => setActive(item.id)}
 							onMouseLeave={() => setActive(null)}
 						>
 							<div className='flex items-center gap-4' key={item.id}>
-								<div className='relative'>
+								<div className='relative flex items-center'>
 									<span className={`${active === item.id && 'absolute hidden'} flex w-5 justify-center`}>{index + 1}</span>
 									<button className={`${active !== item.id && 'absolute hidden'}`} onClick={() => toggle(item.preview_url)}>
 										<FontAwesomeIcon icon={playing ? faPause : faPlay} width={20} height={20} />
