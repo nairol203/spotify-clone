@@ -49,7 +49,7 @@ export default function Home() {
 									</button>
 								</div>
 								<a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
-									<Image className='aspect-square rounded-sm' src={item.album.images[0].url} height={50} width={50} alt='Album Cover' />
+									<Image className='aspect-square max-w-none rounded-sm' src={item.album.images[0].url} height={50} width={50} alt='Album Cover' />
 								</a>
 								<div>
 									<h3>{item.name}</h3>

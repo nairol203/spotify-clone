@@ -20,7 +20,7 @@ export default function Home() {
 							>
 								<div className='flex items-center gap-4'>
 									<a href={item.track.external_urls.spotify} target='_blank' rel='noreferrer'>
-										<Image className='aspect-square rounded-sm' src={item.track.album.images[0].url} height={50} width={50} alt='Album Cover' />
+										<Image className='aspect-square max-w-none rounded-sm' src={item.track.album.images[0].url} height={50} width={50} alt='Album Cover' />
 									</a>
 									<div>
 										<h3>{item.track.name}</h3>
@@ -100,7 +100,7 @@ function CurrentlyPlaying() {
 				<div className='flex items-center gap-4'>
 					<a href={currentlyPlaying.data.item?.external_urls.spotify} target='_blank' rel='noreferrer'>
 						<Image
-							className='aspect-square rounded-sm'
+							className='aspect-square max-w-none rounded-sm'
 							src={
 								// @ts-expect-error
 								currentlyPlaying.data?.item?.album.images[0].url

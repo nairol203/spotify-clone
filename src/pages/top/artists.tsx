@@ -35,7 +35,7 @@ export default function Home() {
 						>
 							<div className='flex w-5 justify-center'>{index + 1}</div>
 							<a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
-								<Image className='aspect-square rounded-sm' src={item.images[0].url} height={50} width={50} alt='Album Cover' />
+								<Image className='aspect-square max-w-none rounded-sm' src={item.images[0].url} height={50} width={50} alt='Album Cover' />
 							</a>
 							<h3>{item.name}</h3>
 						</div>
