@@ -65,17 +65,17 @@ export default function CurrentlyPlaying() {
 						</button>
 					</div>
 					<div className='flex items-center gap-4'>
-						<span>{msToString(currentlyPlaying.data.progress_ms ?? 0)}</span>
-						<progress className='w-52 md:w-96' value={currentlyPlaying.data.progress_ms ?? 0} max={currentlyPlaying.data?.item?.duration_ms} />
-						<span>{msToString(currentlyPlaying.data?.item?.duration_ms ?? 0)}</span>
+						<span className='text-xs'>{msToString(currentlyPlaying.data.progress_ms ?? 0)}</span>
+						<div className='h-1.5 w-52 rounded-full bg-white dark:bg-gray-600 md:w-96 lg:w-[30rem]'>
+							<div
+								className='h-1.5 rounded-full bg-black dark:bg-white'
+								style={{ width: `${((currentlyPlaying.data.progress_ms ?? 0) / (currentlyPlaying.data?.item?.duration_ms ?? 0)) * 100}%` }}
+							/>
+						</div>
+						<span className='text-xs'>{msToString(currentlyPlaying.data?.item?.duration_ms ?? 0)}</span>
 					</div>
 				</div>
 				<div className='hidden justify-end sm:flex'>Volume?</div>
-				<div className='sm:hidden'>
-					<button onClick={() => null}>
-						<FontAwesomeIcon height={60} width={60} icon={faPause} />
-					</button>
-				</div>
 			</div>
 		);
 	}
