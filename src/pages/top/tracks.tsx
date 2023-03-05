@@ -1,3 +1,4 @@
+import { SkeletonObject } from '@components/SkeletonObject';
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trpc } from '@lib/trpc';
@@ -6,7 +7,6 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
 import { z } from 'zod';
-import { SkeletonObject } from '..';
 import { msToString } from '../../lib/helpers';
 
 export default function Home() {

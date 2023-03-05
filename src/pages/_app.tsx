@@ -4,6 +4,7 @@ import NavBar from '@components/NavBar';
 import Footer from '@components/Footer';
 import Head from 'next/head';
 import '../styles/globals.css';
+import CurrentlyPlaying from '@components/CurrentlyPlaying';
 
 function App({ Component, pageProps }: AppProps) {
 	return (
@@ -30,10 +31,11 @@ function App({ Component, pageProps }: AppProps) {
 				<meta name='twitter:card' content='summary' />
 			</Head>
 			<NavBar />
-			<main className='mx-4 mt-14 min-h-screen max-w-screen-maxDesktop md:mt-12 maxDesktop:mx-auto'>
+			<main className='mx-4 mt-14 mb-24 min-h-screen max-w-screen-maxDesktop md:mt-12 maxDesktop:mx-auto'>
 				<Component {...pageProps} />
 			</main>
-			<Footer />
+			<CurrentlyPlaying />
+			{/* <Footer /> */}
 		</>
 	);
 }
