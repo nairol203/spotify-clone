@@ -34,7 +34,7 @@ export default function CurrentlyPlaying() {
 						>
 							{currentlyPlaying.data?.item?.name}
 						</a>
-						<div className='flex gap-1 overflow-hidden text-ellipsis'>
+						<div className='flex gap-1'>
 							{
 								// @ts-expect-error
 								currentlyPlaying.data?.item.artists.map((artist, index) => (
