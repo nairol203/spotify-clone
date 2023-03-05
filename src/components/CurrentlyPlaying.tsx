@@ -25,15 +25,7 @@ export default function CurrentlyPlaying() {
 						/>
 					</div>
 					<div className='flex flex-col justify-center'>
-						<a
-							className='hover:underline'
-							href={
-								// @ts-expect-error
-								currentlyPlaying.data?.item.href
-							}
-							target='_blank'
-							rel='noreferrer'
-						>
+						<a className='hover:underline' href={currentlyPlaying.data?.item?.external_urls.spotify} target='_blank' rel='noreferrer'>
 							{currentlyPlaying.data?.item?.name}
 						</a>
 						<div className='flex gap-1'>
