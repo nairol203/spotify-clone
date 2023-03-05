@@ -22,7 +22,7 @@ export default function CurrentlyPlaying() {
 						width={60}
 						alt='Album Cover'
 					/>
-					<div className='grid items-center'>
+					<div className='flex flex-col justify-center'>
 						<a
 							className='hover:underline'
 							href={
@@ -34,12 +34,12 @@ export default function CurrentlyPlaying() {
 						>
 							{currentlyPlaying.data?.item?.name}
 						</a>
-						<div className='flex items-center gap-1'>
+						<div className='flex gap-1 overflow-hidden text-ellipsis'>
 							{
 								// @ts-expect-error
 								currentlyPlaying.data?.item.artists.map((artist, index) => (
 									<div key={artist.id + index}>
-										<a className='text-sm hover:underline dark:text-gray-300' href={artist.external_urls.spotify} target='_blank' rel='noreferrer'>
+										<a className='text-xs hover:underline dark:text-gray-300' href={artist.external_urls.spotify} target='_blank' rel='noreferrer'>
 											{artist.name}
 										</a>
 										{
@@ -54,13 +54,13 @@ export default function CurrentlyPlaying() {
 				</div>
 				<div className='hidden justify-center gap-3 sm:grid'>
 					<div className='flex justify-center'>
-						<button onClick={() => null}>
+						<button disabled>
 							<FontAwesomeIcon height={40} width={40} icon={faBackwardStep} />
 						</button>
-						<button onClick={() => null}>
+						<button disabled>
 							<FontAwesomeIcon height={40} width={40} icon={faPause} />
 						</button>
-						<button onClick={() => null}>
+						<button disabled>
 							<FontAwesomeIcon height={40} width={40} icon={faForwardStep} />
 						</button>
 					</div>
