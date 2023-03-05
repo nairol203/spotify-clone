@@ -1,4 +1,4 @@
-import { faBackwardStep, faForwardStep, faPause } from '@fortawesome/free-solid-svg-icons';
+import { faBackwardStep, faBars, faForwardStep, faPause } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
@@ -75,7 +75,11 @@ export default function CurrentlyPlaying() {
 						<span className='text-xs'>{msToString(currentlyPlaying.data?.item?.duration_ms ?? 0)}</span>
 					</div>
 				</div>
-				<div className='hidden justify-end sm:flex'>Volume?</div>
+				<div className='hidden justify-end sm:flex'>
+					<button disabled>
+						<FontAwesomeIcon height={40} width={40} icon={faBars} />
+					</button>
+				</div>
 			</div>
 		);
 	}
