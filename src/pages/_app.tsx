@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
 				<meta name='twitter:card' content='summary' />
 			</Head>
 			<NavBar />
-			<main className='mx-4 mt-14 mb-24 min-h-screen max-w-screen-maxDesktop md:mt-12 maxDesktop:mx-auto'>
+			<main className='mx-4 mt-14 mb-20 min-h-screen max-w-screen-maxDesktop sm:mb-24 md:mt-12 maxDesktop:mx-auto'>
 				<Component {...pageProps} />
 			</main>
 			<CurrentlyPlaying />

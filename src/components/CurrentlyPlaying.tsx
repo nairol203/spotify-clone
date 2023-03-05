@@ -10,18 +10,20 @@ export default function CurrentlyPlaying() {
 
 	if (currentlyPlaying.data && currentlyPlaying.data.is_playing && currentlyPlaying.data.currently_playing_type === 'track') {
 		return (
-			<div className='fixed bottom-0 z-10 flex h-24 w-full items-center justify-between bg-card px-4 dark:bg-darkMode-card sm:grid sm:h-24 sm:grid-cols-3'>
+			<div className='fixed bottom-0 z-10 flex h-20 w-full items-center justify-between bg-card px-4 dark:bg-darkMode-card sm:grid sm:h-24 sm:grid-cols-3'>
 				<div className='flex gap-4'>
-					<Image
-						className='aspect-square max-w-none rounded-sm'
-						src={
-							// @ts-expect-error
-							currentlyPlaying.data?.item?.album.images[0].url
-						}
-						height={60}
-						width={60}
-						alt='Album Cover'
-					/>
+					<div className='relative h-12 w-12 sm:h-16 sm:w-16'>
+						<Image
+							className='aspect-square max-w-none rounded-sm object-contain'
+							src={
+								// @ts-expect-error
+								currentlyPlaying.data?.item?.album.images[0].url
+							}
+							alt='Album Cover'
+							fill
+							sizes='3rem 4rem'
+						/>
+					</div>
 					<div className='flex flex-col justify-center'>
 						<a
 							className='hover:underline'
