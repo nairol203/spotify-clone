@@ -8,7 +8,7 @@ export default function Home() {
 	const { data: session } = useSession();
 	// @ts-expect-error
 	const recentTracks = trpc.recentlyPlayed.useQuery({ access_token: session?.user?.access_token });
-	console.log(session);
+
 	return (
 		<div className='grid gap-4 py-4'>
 			<h1>Recently Played</h1>

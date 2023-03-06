@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { SkeletonObject } from '@components/SkeletonObject';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import { useSession } from 'next-auth/react';
@@ -11,7 +11,35 @@ export default function Playlist() {
 	// @ts-expect-error
 	const playlist = trpc.playlist.useQuery({ access_token: session?.user?.access_token, playlist_id: router.query['id']?.[0] });
 
-	if (!playlist.data) return <div></div>;
+	if (!playlist.data)
+		return (
+			<div className='mt-8 grid gap-4 md:py-4'>
+				<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
+					<div className='skeleton relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'></div>
+					<div className='grid gap-2 md:gap-4'>
+						<h1 className='skeleton text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>Lorem iPsum dolor.</h1>
+						<span className='skeleton'>Lorem, ipsum.</span>
+					</div>
+				</div>
+				<div>
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+					<SkeletonObject type='track' ranking />
+				</div>
+			</div>
+		);
 
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>
