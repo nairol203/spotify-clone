@@ -6,7 +6,7 @@ export const authOptions: AuthOptions = {
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID as string,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
-            authorization: 'https://accounts.spotify.com/authorize?scope=user-modify-playback-state playlist-read-private',
+            authorization: 'https://accounts.spotify.com/authorize?scope=user-modify-playback-state playlist-read-private user-library-read',
         }),
     ],
     callbacks: {

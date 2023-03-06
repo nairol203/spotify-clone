@@ -11,8 +11,9 @@ export default function LeftNavBar() {
     const { data: session } = useSession();
     // @ts-expect-error
     const playlists = trpc.playlists.useQuery({ access_token: session?.user?.access_token });
+
     return (
-        <nav className='hidden h-full flex-col overflow-y-auto gap-4 bg-black py-4 px-3 md:flex '>
+        <nav className='hidden h-full flex-col gap-4 overflow-y-auto bg-black py-4 px-3 md:flex '>
             <Link href='/' className='flex items-center gap-2'>
                 <Image
                     src='/logo.png'
@@ -53,15 +54,15 @@ export default function LeftNavBar() {
             </div>
             <div className='h-0.5 w-full rounded-full bg-gray-500' />
             <div className='mx-2 flex flex-col gap-4'>
-                <button disabled onClick={() => null} className='flex items-center gap-2'>
+                <button disabled onClick={() => null} className='flex items-center gap-2 cursor-not-allowed'>
                     <FontAwesomeIcon icon={faPlus} height={20} width={20} />
                     <span>Playlist erstellen</span>
                 </button>
-                <button disabled onClick={() => null} className='flex items-center gap-2'>
+                <Link href='/collection/tracks' className='flex items-center gap-2'>
                     <FontAwesomeIcon icon={faHeart} height={20} width={20} />
                     <span>Lieblingssongs</span>
-                </button>
-                <button disabled onClick={() => null} className='flex items-center gap-2'>
+                </Link>
+                <button disabled onClick={() => null} className='flex items-center gap-2 cursor-not-allowed'>
                     <FontAwesomeIcon icon={faBookmark} height={20} width={20} />
                     <span>Deine Folgen</span>
                 </button>
@@ -70,15 +71,13 @@ export default function LeftNavBar() {
             <div className='flex flex-col gap-1'>
                 {playlists.data?.items &&
                     playlists.data.items.map((playlist, index) => (
-                        <a
+                        <Link
                             className='overflow-hidden text-ellipsis whitespace-nowrap text-gray-300  hover:text-black hover:dark:text-white'
                             key={playlist.id + index}
-                            href={playlist.external_urls.spotify}
-                            target='_blank'
-                            rel='noreferrer'
+                            href={`/playlist/${playlist.id}`}
                         >
                             {playlist.name}
-                        </a>
+                        </Link>
                     ))}
             </div>
         </nav>

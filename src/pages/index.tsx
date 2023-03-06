@@ -11,9 +11,7 @@ export default function Home() {
     console.log(session)
     return (
         <div className='grid gap-4 py-4'>
-            <h1>Spotify Stats</h1>
-            <div className='grid gap-1'>
-                <h2>Recently Played</h2>
+                <h1>Recently Played</h1>
                 <div>
                     {recentTracks.data ? (
                         recentTracks.data.items.map((item, index) => (
@@ -64,7 +62,6 @@ export default function Home() {
                         </>
                     )}
                 </div>
-            </div>
         </div>
     );
 }
