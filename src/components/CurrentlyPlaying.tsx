@@ -32,8 +32,8 @@ export default function CurrentlyPlaying() {
                             {
                                 // @ts-expect-error
                                 currentlyPlaying.data?.item.artists.map((artist, index) => (
-                                    <div key={artist.id + index}>
-                                        <a className='text-xs hover:underline dark:text-gray-300' href={artist.external_urls.spotify} target='_blank' rel='noreferrer'>
+                                    <div className='dark:text-gray-300' key={artist.id + index}>
+                                        <a className='text-xs hover:underline' href={artist.external_urls.spotify} target='_blank' rel='noreferrer'>
                                             {artist.name}
                                         </a>
                                         {
