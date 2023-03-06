@@ -1,4 +1,4 @@
-import { faBackwardStep, faBars, faForwardStep, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faBackwardStep, faBars, faForwardStep, faPause, faPlay, faRepeat, faShuffle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
@@ -10,7 +10,7 @@ export default function CurrentlyPlaying() {
 
     if (currentlyPlaying.data?.currently_playing_type === 'track') {
         return (
-            <div className='z-10 flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
+            <div className='flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
                 <div className='flex gap-4'>
                     <div className='relative h-12 w-12 sm:h-16 sm:w-16'>
                         <Image
@@ -47,15 +47,21 @@ export default function CurrentlyPlaying() {
                     </div>
                 </div>
                 <div className='hidden justify-center gap-3 sm:grid'>
-                    <div className='flex justify-center gap-2'>
+                    <div className='flex justify-center gap-5'>
                         <button disabled>
-                            <FontAwesomeIcon height={25} width={25} icon={faBackwardStep} />
+                            <FontAwesomeIcon height={15} width={15} icon={faShuffle} className='text-gray-400' />
                         </button>
                         <button disabled>
-                            <FontAwesomeIcon height={25} width={25} icon={currentlyPlaying.data.is_playing ? faPause : faPlay} />
+                            <FontAwesomeIcon height={25} width={25} icon={faBackwardStep} className='text-gray-400' />
+                        </button>
+                        <button disabled className='rounded-full bg-black p-1.5 dark:bg-white'>
+                            <FontAwesomeIcon height={25} width={25} icon={currentlyPlaying.data.is_playing ? faPause : faPlay} className='text-white dark:text-black' />
                         </button>
                         <button disabled>
-                            <FontAwesomeIcon height={25} width={25} icon={faForwardStep} />
+                            <FontAwesomeIcon height={25} width={25} icon={faForwardStep} className='text-gray-400' />
+                        </button>
+                        <button disabled>
+                            <FontAwesomeIcon height={15} width={15} icon={faRepeat} className='text-gray-400' />
                         </button>
                     </div>
                     <div className='flex items-center gap-4'>
@@ -94,15 +100,21 @@ export default function CurrentlyPlaying() {
                 </div>
             </div>
             <div className='hidden justify-center gap-3 sm:grid'>
-                <div className='flex justify-center gap-2'>
+                <div className='flex justify-center gap-5'>
                     <button disabled>
-                        <FontAwesomeIcon height={25} width={25} icon={faBackwardStep} />
+                        <FontAwesomeIcon height={15} width={15} icon={faShuffle} className='text-gray-400' />
                     </button>
                     <button disabled>
-                        <FontAwesomeIcon height={25} width={25} icon={faPlay} />
+                        <FontAwesomeIcon height={25} width={25} icon={faBackwardStep} className='text-gray-400' />
+                    </button>
+                    <button disabled className='rounded-full bg-black p-1.5 dark:bg-white'>
+                        <FontAwesomeIcon height={25} width={25} icon={faPlay} className='text-white dark:text-black' />
                     </button>
                     <button disabled>
-                        <FontAwesomeIcon height={25} width={25} icon={faForwardStep} />
+                        <FontAwesomeIcon height={25} width={25} icon={faForwardStep} className='text-gray-400' />
+                    </button>
+                    <button disabled>
+                        <FontAwesomeIcon height={15} width={15} icon={faRepeat} className='text-gray-400' />
                     </button>
                 </div>
                 <div className='flex items-center gap-4'>
