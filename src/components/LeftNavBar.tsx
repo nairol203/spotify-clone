@@ -41,15 +41,15 @@ export default function LeftNavBar() {
 			</div>
 			<div className='h-0.5 w-full rounded-full bg-gray-500' />
 			<div className='mx-2 flex flex-col gap-4'>
-				<button disabled onClick={() => null} className='flex cursor-not-allowed items-center gap-2 text-gray-300'>
+				<button disabled onClick={() => null} className='flex cursor-not-allowed items-center gap-4 text-gray-300'>
 					<FontAwesomeIcon icon={faPlus} height={20} width={20} />
 					<span>Playlist erstellen</span>
 				</button>
-				<Link href='/collection/tracks' className={`${router.pathname === '/collection/tracks' ? 'text-white' : 'hover:text-white'} flex items-center gap-2 text-gray-300`}>
+				<Link href='/collection/tracks' className={`${router.pathname === '/collection/tracks' ? 'text-white' : 'hover:text-white'} flex items-center gap-4 text-gray-300`}>
 					<FontAwesomeIcon icon={faHeart} height={20} width={20} />
 					<span>Lieblingssongs</span>
 				</Link>
-				<button disabled onClick={() => null} className='flex cursor-not-allowed items-center gap-2 text-gray-300'>
+				<button disabled onClick={() => null} className='flex cursor-not-allowed items-center gap-4 text-gray-300'>
 					<FontAwesomeIcon icon={faBookmark} height={20} width={20} />
 					<span>Deine Folgen</span>
 				</button>
