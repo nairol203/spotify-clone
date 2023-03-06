@@ -19,10 +19,10 @@
         border-radius: 8px;
     }
 
-    svg {
+    /* svg {
         fill: currentColor;
         @apply text-text dark:text-darkMode-text;
-    }
+    } */
 
     body {
         @apply bg-background text-text accent-secondary dark:bg-darkMode-background dark:text-darkMode-text;
