@@ -10,7 +10,7 @@ export default function CurrentlyPlaying() {
 
     if (currentlyPlaying.data && currentlyPlaying.data.is_playing && currentlyPlaying.data.currently_playing_type === 'track') {
         return (
-            <div className='fixed bottom-0 z-10 flex h-20 w-full items-center justify-between border-t-[1px] border-t-[#282828] bg-card px-4 dark:bg-darkMode-card sm:grid sm:h-24 sm:grid-cols-3'>
+            <div className='z-10 flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] dark:border-t-[#282828] bg-card px-4 dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
                 <div className='flex gap-4'>
                     <div className='relative h-12 w-12 sm:h-16 sm:w-16'>
                         <Image
@@ -84,5 +84,5 @@ export default function CurrentlyPlaying() {
         );
     }
 
-    return <></>;
+    return <div className='h-full border-t-[1px] border-t-[#282828] bg-card dark:bg-darkMode-card'>Nothing playing...</div>;
 }

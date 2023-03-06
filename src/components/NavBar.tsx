@@ -6,7 +6,7 @@ export default function NavBar() {
     const router = useRouter();
 
     return (
-        <nav className='fixed top-0 z-10 flex h-14 w-full items-center gap-8 border-b-[1px] border-b-[#282828] bg-card px-4 shadow-sm dark:bg-darkMode-card md:h-12'>
+        <nav className='z-10 flex h-full w-full items-center gap-8 border-b-[1px] border-b-[#bebebe] dark:border-b-[#282828] bg-card px-4 shadow-sm dark:bg-darkMode-card'>
             <Link href='/'>
                 <Image
                     src='/logo.png'
