@@ -7,7 +7,7 @@ const nextConfig = {
 		defaultLocale: 'de',
 	},
 	images: {
-		domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com', 'lineup-images.scdn.co'],
+		domains: ['i.scdn.co', 'mosaic.scdn.co', 'wrapped-images.spotifycdn.com', 'lineup-images.scdn.co', 'newjams-images.scdn.co'],
 	},
 };
 
