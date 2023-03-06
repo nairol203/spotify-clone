@@ -6,7 +6,7 @@ export const authOptions: AuthOptions = {
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID as string,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
-            authorization: 'https://accounts.spotify.com/authorize?scope=user-read-email',
+            authorization: 'https://accounts.spotify.com/authorize?scope=user-modify-playback-state playlist-read-private',
         }),
     ],
     callbacks: {
@@ -35,6 +35,8 @@ export const authOptions: AuthOptions = {
                     const tokens = await response.json();
 
                     if (!response.ok) throw tokens;
+
+                    console.log(tokens)
 
                     return {
                         ...token,

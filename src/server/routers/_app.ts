@@ -62,23 +62,6 @@ export const appRouter = router({
 
             return (await res.json()) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
         }),
-    playbackState: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .query(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player`, {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            return (await res.json()) as SpotifyApi.PlayParameterObject;
-        }),
     currentlyPlaying: procedure
         .input(
             z.object({
@@ -95,6 +78,99 @@ export const appRouter = router({
             });
 
             return (await res.json()) as SpotifyApi.CurrentlyPlayingResponse;
+        }),
+    playbackState: procedure
+        .input(
+            z.object({
+                access_token: z.string(),
+            })
+        )
+        .query(async ({ input }) => {
+            const res = await fetch(`${API_ENDPOINT}/me/player`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${input.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            return (await res.json());
+        }),
+    pause: procedure
+        .input(
+            z.object({
+                access_token: z.string(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            const res = await fetch(`${API_ENDPOINT}/me/player/pause`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${input.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+			console.log(res.statusText)
+
+            return (await res.json());
+        }),
+    play: procedure
+        .input(
+            z.object({
+                access_token: z.string(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            const res = await fetch(`${API_ENDPOINT}/me/player/play`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${input.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+			console.log(res.statusText)
+
+            return (await res.json());
+        }),
+    next: procedure
+        .input(
+            z.object({
+                access_token: z.string(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            const res = await fetch(`${API_ENDPOINT}/me/player/next`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${input.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+			console.log(res.statusText)
+
+            return (await res.json());
+        }),
+    previous: procedure
+        .input(
+            z.object({
+                access_token: z.string(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            const res = await fetch(`${API_ENDPOINT}/me/player/previous`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${input.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+			console.log(res.statusText)
+
+            return (await res.json());
         }),
 });
 

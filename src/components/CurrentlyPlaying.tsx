@@ -9,6 +9,20 @@ export default function CurrentlyPlaying() {
     const { data: session } = useSession();
     // @ts-expect-error
     const currentlyPlaying = trpc.currentlyPlaying.useQuery({ access_token: session?.user?.access_token }, { refetchInterval: 1000 });
+    const pause = trpc.pause.useMutation();
+    const play = trpc.play.useMutation();
+    const next = trpc.next.useMutation();
+    const previous = trpc.previous.useMutation();
+
+    const togglePlay = () => {
+        if (currentlyPlaying.data?.is_playing) {
+            // @ts-expect-error
+            pause.mutate({ access_token: session?.user?.access_token });
+        } else {
+            // @ts-expect-error
+            play.mutate({ access_token: session?.user?.access_token });
+        }
+    };
 
     if (currentlyPlaying.data?.currently_playing_type === 'track') {
         return (
@@ -50,20 +64,32 @@ export default function CurrentlyPlaying() {
                 </div>
                 <div className='hidden flex-col justify-center gap-2 sm:flex'>
                     <div className='flex justify-center gap-5'>
-                        <button disabled>
-                            <FontAwesomeIcon height={15} width={15} icon={faShuffle} className='text-gray-400' />
+                        <button onClick={() => null} disabled>
+                            <FontAwesomeIcon height={15} width={15} icon={faShuffle} className='text-gray-400 hover:text-black hover:dark:text-white' />
                         </button>
-                        <button disabled>
-                            <FontAwesomeIcon height={25} width={25} icon={faBackwardStep} className='text-gray-400' />
+                        <button
+                            title='Zurück'
+                            onClick={
+                                // @ts-expect-error
+                                () => previous.mutate({ access_token: session?.user?.access_token })
+                            }
+                        >
+                            <FontAwesomeIcon height={25} width={25} icon={faBackwardStep} className='text-gray-400 hover:text-black hover:dark:text-white' />
                         </button>
-                        <button disabled className='rounded-full bg-black p-1.5 dark:bg-white'>
+                        <button title={currentlyPlaying.data.is_playing ? 'Pause' : 'Play'} onClick={togglePlay} className='rounded-full bg-black p-1.5 dark:bg-white'>
                             <FontAwesomeIcon height={25} width={25} icon={currentlyPlaying.data.is_playing ? faPause : faPlay} className='text-white dark:text-black' />
                         </button>
-                        <button disabled>
-                            <FontAwesomeIcon height={25} width={25} icon={faForwardStep} className='text-gray-400' />
+                        <button
+                            title='Weiter'
+                            onClick={
+                                // @ts-expect-error
+                                () => next.mutate({ access_token: session?.user?.access_token })
+                            }
+                        >
+                            <FontAwesomeIcon height={25} width={25} icon={faForwardStep} className='text-gray-400 hover:text-black hover:dark:text-white' />
                         </button>
-                        <button disabled>
-                            <FontAwesomeIcon height={15} width={15} icon={faRepeat} className='text-gray-400' />
+                        <button onClick={() => null} disabled>
+                            <FontAwesomeIcon height={15} width={15} icon={faRepeat} className='text-gray-400 hover:text-black hover:dark:text-white' />
                         </button>
                     </div>
                     <div className='flex items-center gap-4'>
