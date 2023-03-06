@@ -66,9 +66,9 @@ export default function CurrentlyPlaying() {
                     </div>
                     <div className='flex items-center gap-4'>
                         <span className='text-xs'>{msToString(currentlyPlaying.data.progress_ms ?? 0)}</span>
-                        <div className='h-1.5 w-52 rounded-full bg-white dark:bg-gray-600 md:w-96 lg:w-[30rem]'>
+                        <div className='h-1 w-52 rounded-full bg-white dark:bg-gray-600 md:w-96 lg:w-[30rem]'>
                             <div
-                                className='h-1.5 rounded-full bg-black dark:bg-white'
+                                className='h-1 rounded-full bg-black dark:bg-white'
                                 style={{ width: `${((currentlyPlaying.data.progress_ms ?? 0) / (currentlyPlaying.data?.item?.duration_ms ?? 0)) * 100}%` }}
                             />
                         </div>
@@ -76,9 +76,9 @@ export default function CurrentlyPlaying() {
                     </div>
                 </div>
                 <div className='hidden justify-end sm:flex'>
-                    <button disabled>
+                    {/* <button disabled>
                         <FontAwesomeIcon height={30} width={30} icon={faBars} />
-                    </button>
+                    </button> */}
                 </div>
                 <div className='absolute bottom-0 h-1 w-11/12 rounded-full bg-white dark:bg-gray-600 sm:hidden'>
                     <div
@@ -119,16 +119,16 @@ export default function CurrentlyPlaying() {
                 </div>
                 <div className='flex items-center gap-4'>
                     <span className='text-xs'>{msToString(0)}</span>
-                    <div className='h-1.5 w-52 rounded-full bg-white dark:bg-gray-600 md:w-96 lg:w-[30rem]'>
-                        <div className='h-1.5 w-0 rounded-full bg-black dark:bg-white' />
+                    <div className='h-1 w-52 rounded-full bg-white dark:bg-gray-600 md:w-96 lg:w-[30rem]'>
+                        <div className='h-1 w-0 rounded-full bg-black dark:bg-white' />
                     </div>
                     <span className='text-xs'>{msToString(0)}</span>
                 </div>
             </div>
             <div className='hidden justify-end sm:flex'>
-                <button disabled>
+                {/* <button disabled>
                     <FontAwesomeIcon height={30} width={30} icon={faBars} />
-                </button>
+                </button> */}
             </div>
             <div className='absolute bottom-0 h-1 w-11/12 rounded-full bg-white dark:bg-gray-600 sm:hidden'>
                 <div className='h-1 w-0 rounded-full bg-black dark:bg-white' />
