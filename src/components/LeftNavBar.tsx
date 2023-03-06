@@ -12,6 +12,8 @@ export default function LeftNavBar() {
     // @ts-expect-error
     const playlists = trpc.playlists.useQuery({ access_token: session?.user?.access_token });
 
+    console.log(router);
+
     return (
         <nav className='hidden h-full flex-col gap-4 overflow-y-auto bg-black py-4 px-3 md:flex '>
             <Link href='/' className='flex items-center gap-2'>
@@ -54,15 +56,20 @@ export default function LeftNavBar() {
             </div>
             <div className='h-0.5 w-full rounded-full bg-gray-500' />
             <div className='mx-2 flex flex-col gap-4'>
-                <button disabled onClick={() => null} className='flex items-center gap-2 cursor-not-allowed'>
+                <button disabled onClick={() => null} className='flex cursor-not-allowed items-center gap-2 text-gray-300'>
                     <FontAwesomeIcon icon={faPlus} height={20} width={20} />
                     <span>Playlist erstellen</span>
                 </button>
-                <Link href='/collection/tracks' className='flex items-center gap-2'>
+                <Link
+                    href='/collection/tracks'
+                    className={`${
+                        router.pathname === '/collection/tracks' ? 'text-black dark:text-white' : 'hover:text-black hover:dark:text-white'
+                    } flex items-center gap-2 text-gray-300`}
+                >
                     <FontAwesomeIcon icon={faHeart} height={20} width={20} />
                     <span>Lieblingssongs</span>
                 </Link>
-                <button disabled onClick={() => null} className='flex items-center gap-2 cursor-not-allowed'>
+                <button disabled onClick={() => null} className='flex cursor-not-allowed items-center gap-2 text-gray-300'>
                     <FontAwesomeIcon icon={faBookmark} height={20} width={20} />
                     <span>Deine Folgen</span>
                 </button>
@@ -72,7 +79,7 @@ export default function LeftNavBar() {
                 {playlists.data?.items &&
                     playlists.data.items.map((playlist, index) => (
                         <Link
-                            className='overflow-hidden text-ellipsis whitespace-nowrap text-gray-300  hover:text-black hover:dark:text-white'
+                            className={`${router.asPath === `/playlist/${playlist.id}` ? 'text-black dark:text-white' : 'hover:text-black hover:dark:text-white'} text-gray-300`}
                             key={playlist.id + index}
                             href={`/playlist/${playlist.id}`}
                         >
