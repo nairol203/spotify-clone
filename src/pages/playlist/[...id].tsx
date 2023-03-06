@@ -14,11 +14,13 @@ export default function Playlist() {
 	if (!playlist.data) return <div></div>;
 
 	return (
-		<div className='mt-8 grid gap-4 py-4'>
-			<div className='flex items-center gap-8'>
-				<Image height={200} width={200} src={playlist.data.images[0]?.url} alt='Playlist Cover' />
-				<div className='grid gap-4'>
-					<h1 className='text-6xl'>{playlist.data.name}</h1>
+		<div className='mt-8 grid gap-4 md:py-4'>
+			<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
+				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'>
+					<Image src={playlist.data.images[0]?.url} alt='Playlist Cover' fill sizes='8rem 11rem 15rem' className='object-contain' />
+				</div>
+				<div className='grid gap-2 md:gap-4'>
+					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{playlist.data.name}</h1>
 					<span>{playlist.data.description}</span>
 				</div>
 			</div>
