@@ -46,7 +46,7 @@ export default function CurrentlyPlaying() {
                         </div>
                     </div>
                 </div>
-                <div className='hidden justify-center gap-2 sm:flex flex-col '>
+                <div className='hidden flex-col justify-center gap-2 sm:flex'>
                     <div className='flex justify-center gap-5'>
                         <button disabled>
                             <FontAwesomeIcon height={15} width={15} icon={faShuffle} className='text-gray-400' />
@@ -91,7 +91,7 @@ export default function CurrentlyPlaying() {
     }
 
     return (
-        <div className='relative flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
+        <div className='relative flex h-full w-full items-center border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-[1fr_1fr_1fr]'>
             <div className='flex gap-4'>
                 <div className='relative h-12 w-12 sm:h-16 sm:w-16'></div>
                 <div className='flex flex-col justify-center'>
@@ -99,7 +99,7 @@ export default function CurrentlyPlaying() {
                     <div className='flex gap-1'></div>
                 </div>
             </div>
-            <div className='hidden justify-center gap-3 sm:grid'>
+            <div className='hidden flex-col justify-center gap-3 sm:flex'>
                 <div className='flex justify-center gap-5'>
                     <button disabled>
                         <FontAwesomeIcon height={15} width={15} icon={faShuffle} className='text-gray-400' />
@@ -119,7 +119,7 @@ export default function CurrentlyPlaying() {
                 </div>
                 <div className='flex items-center gap-4'>
                     <span className='text-xs'>{msToString(0)}</span>
-                    <div className='h-1 w-52 rounded-full bg-white dark:bg-gray-600 md:w-96 lg:w-[30rem]'>
+                    <div className='h-1 w-full rounded-full bg-white dark:bg-gray-600'>
                         <div className='h-1 w-0 rounded-full bg-black dark:bg-white' />
                     </div>
                     <span className='text-xs'>{msToString(0)}</span>
