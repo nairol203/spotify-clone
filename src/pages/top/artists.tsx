@@ -30,7 +30,7 @@ export default function Home() {
 				{topTracks.data ? (
 					topTracks.data.items.map((item, index) => (
 						<div
-							className='flex items-center gap-4 rounded-[4px] px-4 py-2 hover:bg-black hover:bg-opacity-10 hover:dark:bg-white hover:dark:bg-opacity-10'
+							className='flex items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-black md:hover:bg-opacity-10 md:hover:dark:bg-white md:hover:dark:bg-opacity-10'
 							key={item.id}
 						>
 							<div className='flex w-5 justify-center'>{index + 1}</div>
