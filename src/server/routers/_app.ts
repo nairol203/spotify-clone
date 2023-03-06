@@ -79,14 +79,14 @@ export const appRouter = router({
 
             return (await res.json()) as SpotifyApi.CurrentlyPlayingResponse;
         }),
-    playbackState: procedure
+    playlists: procedure
         .input(
             z.object({
                 access_token: z.string(),
             })
         )
         .query(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player`, {
+            const res = await fetch(`${API_ENDPOINT}/me/playlists`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${input.access_token}`,
@@ -94,7 +94,7 @@ export const appRouter = router({
                 },
             });
 
-            return (await res.json());
+            return (await res.json()) as SpotifyApi.ListOfUsersPlaylistsResponse;
         }),
     pause: procedure
         .input(
@@ -110,8 +110,6 @@ export const appRouter = router({
                     'Content-Type': 'application/json',
                 },
             });
-
-			console.log(res.statusText)
 
             return (await res.json());
         }),
@@ -130,8 +128,6 @@ export const appRouter = router({
                 },
             });
 
-			console.log(res.statusText)
-
             return (await res.json());
         }),
     next: procedure
@@ -149,8 +145,6 @@ export const appRouter = router({
                 },
             });
 
-			console.log(res.statusText)
-
             return (await res.json());
         }),
     previous: procedure
@@ -167,8 +161,6 @@ export const appRouter = router({
                     'Content-Type': 'application/json',
                 },
             });
-
-			console.log(res.statusText)
 
             return (await res.json());
         }),

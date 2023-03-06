@@ -36,8 +36,6 @@ export const authOptions: AuthOptions = {
 
                     if (!response.ok) throw tokens;
 
-                    console.log(tokens)
-
                     return {
                         ...token,
                         access_token: tokens.access_token,

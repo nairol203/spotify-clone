@@ -6,6 +6,7 @@ import Head from 'next/head';
 import '../styles/globals.css';
 import CurrentlyPlaying from '@components/CurrentlyPlaying';
 import { SessionProvider } from 'next-auth/react';
+import LeftNavBar from '@components/LeftNavBar';
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     return (
@@ -31,14 +32,19 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
                 <meta name='twitter:creator' content='@nairol203' />
                 <meta name='twitter:ccrard' content='summary' />
             </Head>
-            <div className='grid h-screen grid-rows-[3.5rem_1fr_5rem] md:grid-rows-[3rem_1fr_6rem]'>
-                <NavBar />
-                <main className='overflow-y-scroll'>
-                    <div className='mx-4'>
-                        <Component {...pageProps} />
-                    </div>
-                    <Footer />
-                </main>
+            <div className='grid h-screen grid-rows-[3.5rem_1fr_5rem] md:grid-rows-[1fr_6rem]'>
+                <div className='md:hidden'>
+                    <NavBar />
+                </div>
+                <div className='overflow-y-auto md:grid md:grid-cols-[15rem_1fr]'>
+                    <LeftNavBar />
+                    <main className='overflow-y-auto'>
+                        <div className='mx-4'>
+                            <Component {...pageProps} />
+                            <Footer />
+                        </div>
+                    </main>
+                </div>
                 <CurrentlyPlaying />
             </div>
         </SessionProvider>
