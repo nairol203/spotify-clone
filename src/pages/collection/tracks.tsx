@@ -11,16 +11,16 @@ export default function Tracks() {
 	const savedTracks = trpc.savedTracks.useQuery({ access_token: session?.user?.access_token });
 
 	if (!savedTracks.data) return <div></div>;
-	console.log(savedTracks.data);
+
 	return (
-		<div className='mt-8 grid gap-4 py-4'>
-			<div className='flex items-center gap-8'>
-				<FontAwesomeIcon icon={faHeart} height={200} width={200} />
-				<div className='grid gap-4'>
-					<h1 className='text-6xl'>Lieblingssongs</h1>
+		<div className='mt-8 grid gap-4 md:py-4'>
+			<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
+				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'>
+					<FontAwesomeIcon icon={faHeart} />
 				</div>
-			</div>
-			<div>
+				<div className='grid gap-2 md:gap-4'>
+					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>Lieblingssongs</h1>
+				</div>
 				{savedTracks.data.items.map(
 					(track, index) =>
 						track.track && (
