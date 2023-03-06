@@ -2,11 +2,13 @@ import { faBackwardStep, faBars, faForwardStep, faPause, faPlay, faRepeat, faShu
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 export default function CurrentlyPlaying() {
+    const { data: session } = useSession();
     // @ts-expect-error
-    const currentlyPlaying = trpc.currentlyPlaying.useQuery({}, { refetchInterval: 1000 });
+    const currentlyPlaying = trpc.currentlyPlaying.useQuery({ access_token: session?.user?.access_token }, { refetchInterval: 1000 });
 
     if (currentlyPlaying.data?.currently_playing_type === 'track') {
         return (

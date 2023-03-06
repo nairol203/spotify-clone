@@ -5,10 +5,11 @@ import Footer from '@components/Footer';
 import Head from 'next/head';
 import '../styles/globals.css';
 import CurrentlyPlaying from '@components/CurrentlyPlaying';
+import { SessionProvider } from 'next-auth/react';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     return (
-        <>
+        <SessionProvider session={session}>
             <Head>
                 <link rel='icon' href='/logo.png' />
                 <title>Nairol Spotify Stats</title>
@@ -36,11 +37,11 @@ function App({ Component, pageProps }: AppProps) {
                     <div className='mx-4'>
                         <Component {...pageProps} />
                     </div>
-					<Footer />
+                    <Footer />
                 </main>
                 <CurrentlyPlaying />
             </div>
-        </>
+        </SessionProvider>
     );
 }
 

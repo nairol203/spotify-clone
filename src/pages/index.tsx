@@ -1,10 +1,13 @@
 import { SkeletonObject } from '@components/SkeletonObject';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 export default function Home() {
-    const recentTracks = trpc.recentlyPlayed.useQuery();
+    const { data: session } = useSession();
+    // @ts-expect-error
+    const recentTracks = trpc.recentlyPlayed.useQuery({ access_token: session?.user?.access_token });
 
     return (
         <div className='grid gap-4 py-4'>
