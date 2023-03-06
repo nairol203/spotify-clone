@@ -12,8 +12,6 @@ export default function LeftNavBar() {
 	// @ts-expect-error
 	const playlists = trpc.playlists.useQuery({ access_token: session?.user?.access_token });
 
-	console.log(router);
-
 	return (
 		<nav className='hidden h-full flex-col gap-4 overflow-y-auto bg-black py-4 px-3 md:flex '>
 			<Link href='/' className='flex items-center gap-2'>
@@ -61,7 +59,9 @@ export default function LeftNavBar() {
 				{playlists.data?.items &&
 					playlists.data.items.map((playlist, index) => (
 						<Link
-							className={`${router.asPath === `/playlist/${playlist.id}` ? 'text-white' : 'hover:text-white'} text-gray-300`}
+							className={`${
+								router.asPath === `/playlist/${playlist.id}` ? 'text-white' : 'hover:text-white'
+							} overflow-hidden text-ellipsis whitespace-nowrap text-gray-300`}
 							key={playlist.id + index}
 							href={`/playlist/${playlist.id}`}
 						>
