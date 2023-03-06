@@ -53,7 +53,7 @@ export default function Home() {
                                 </a>
                                 <div>
                                     <h3>{item.name}</h3>
-                                    <div className='flex flex-wrap items-center gap-1'>
+                                    <div className='flex flex-wrap items-center gap-x-1'>
                                         {item.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
                                         {item.artists.map((artist, index) => (
                                             <div className='dark:text-gray-300' key={artist.id + index}>
