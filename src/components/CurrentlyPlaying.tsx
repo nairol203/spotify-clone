@@ -10,7 +10,7 @@ export default function CurrentlyPlaying() {
 
     if (currentlyPlaying.data?.currently_playing_type === 'track') {
         return (
-            <div className='flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
+            <div className='relative flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
                 <div className='flex gap-4'>
                     <div className='relative h-12 w-12 sm:h-16 sm:w-16'>
                         <Image
@@ -91,7 +91,7 @@ export default function CurrentlyPlaying() {
     }
 
     return (
-        <div className='z-10 flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
+        <div className='relative flex h-full w-full items-center justify-between border-t-[1px] border-t-[#bebebe] bg-card px-4 dark:border-t-[#282828] dark:bg-darkMode-card sm:grid sm:grid-cols-3'>
             <div className='flex gap-4'>
                 <div className='relative h-12 w-12 sm:h-16 sm:w-16'></div>
                 <div className='flex flex-col justify-center'>
