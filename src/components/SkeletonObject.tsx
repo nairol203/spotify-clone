@@ -37,10 +37,10 @@ export const SkeletonObjectDetailed: React.FC<{ type: 'track' | 'album'; ranking
 					)}
 				</div>
 			</div>
-			<div className='flex'>
+			<div className='hidden lg:flex'>
 				<span className='skeleton'>Lorem, ipsum.</span>
 			</div>
-			<div className='flex'>
+			<div className='hidden lg:flex'>
 				<span className='skeleton'>Lorem, ipsum.</span>
 			</div>
 			{type === 'track' && (
