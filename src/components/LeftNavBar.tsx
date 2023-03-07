@@ -1,16 +1,13 @@
 import { faBookmark, faChartLine, faHeart, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trpc } from '@lib/trpc';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 export default function LeftNavBar() {
 	const router = useRouter();
-	const { data: session } = useSession();
-	// @ts-expect-error
-	const playlists = trpc.playlists.useQuery({ access_token: session?.user?.access_token });
+	const playlists = trpc.playlists.useQuery();
 
 	return (
 		<nav className='hidden h-full flex-col gap-4 overflow-y-auto bg-black py-4 px-3 md:flex '>

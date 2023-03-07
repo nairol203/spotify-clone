@@ -3,13 +3,10 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { calcTime, msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 export default function Tracks() {
-	const { data: session } = useSession();
-	// @ts-expect-error
-	const savedTracks = trpc.savedTracks.useQuery({ access_token: session?.user?.access_token });
+	const savedTracks = trpc.savedTracks.useQuery();
 
 	if (!savedTracks.data)
 		return (

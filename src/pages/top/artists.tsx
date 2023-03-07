@@ -1,16 +1,13 @@
 import { SkeletonObject } from '@components/SkeletonObject';
 import { trpc } from '@lib/trpc';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
 import { z } from 'zod';
 
 export default function Home() {
-	const { data: session } = useSession();
 	const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
-	// @ts-expect-error
-	const topTracks = trpc.topArtists.useQuery({ access_token: session?.user?.access_token, range });
+	const topTracks = trpc.topArtists.useQuery({ range });
 
 	return (
 		<div className='grid gap-4 py-4'>

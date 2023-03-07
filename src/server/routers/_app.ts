@@ -1,5 +1,3 @@
-import getAccessToken from '@lib/spotify';
-import { useSession } from 'next-auth/react';
 import { z } from 'zod';
 import { procedure, router } from '../trpc';
 
@@ -10,16 +8,16 @@ export const appRouter = router({
     topTracks: procedure
         .input(
             z.object({
-                access_token: z.string(),
                 range: SPOTIFY_RANGE,
                 limit: z.optional(z.string()),
             })
         )
-        .query(async ({ input }) => {
+        .query(async ({ ctx, input }) => {
             const res = await fetch(`${API_ENDPOINT}/me/top/tracks?limit=${input.limit || 50}&time_range=${input.range}`, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${input.access_token}`,
+                    // @ts-expect-error
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                     'Content-Type': 'application/json',
                 },
             });
@@ -29,176 +27,136 @@ export const appRouter = router({
     topArtists: procedure
         .input(
             z.object({
-                access_token: z.string(),
                 range: SPOTIFY_RANGE,
                 limit: z.optional(z.string()),
             })
         )
-        .query(async ({ input }) => {
+        .query(async ({ ctx, input }) => {
             const res = await fetch(`${API_ENDPOINT}/me/top/artists?limit=${input.limit || 50}&time_range=${input.range}`, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${input.access_token}`,
+                    // @ts-expect-error
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                     'Content-Type': 'application/json',
                 },
             });
 
             return (await res.json()) as SpotifyApi.UsersTopArtistsResponse;
         }),
-    recentlyPlayed: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .query(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player/recently-played?limit=50`, {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+    recentlyPlayed: procedure.query(async ({ ctx }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/player/recently-played?limit=50`, {
+            method: 'GET',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json()) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
-        }),
-    currentlyPlaying: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .query(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player/currently-playing`, {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+        return (await res.json()) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
+    }),
+    currentlyPlaying: procedure.query(async ({ ctx }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/player/currently-playing`, {
+            method: 'GET',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json()) as SpotifyApi.CurrentlyPlayingResponse;
-        }),
-    playlists: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .query(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/playlists`, {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+        return (await res.json()) as SpotifyApi.CurrentlyPlayingResponse;
+    }),
+    playlists: procedure.query(async ({ ctx }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/playlists`, {
+            method: 'GET',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json()) as SpotifyApi.ListOfUsersPlaylistsResponse;
-        }),
+        return (await res.json()) as SpotifyApi.ListOfUsersPlaylistsResponse;
+    }),
     playlist: procedure
         .input(
             z.object({
-                access_token: z.string(),
                 playlist_id: z.string(),
             })
         )
-        .query(async ({ input }) => {
+        .query(async ({ ctx, input }) => {
             const res = await fetch(`${API_ENDPOINT}/playlists/${input.playlist_id}`, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${input.access_token}`,
+                    // @ts-expect-error
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                     'Content-Type': 'application/json',
                 },
             });
 
             return (await res.json()) as SpotifyApi.PlaylistObjectFull;
         }),
-    savedTracks: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .query(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/tracks`, {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+    savedTracks: procedure.query(async ({ ctx, input }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/tracks`, {
+            method: 'GET',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json()) as SpotifyApi.UsersSavedTracksResponse;
-        }),
-    pause: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .mutation(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player/pause`, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+        return (await res.json()) as SpotifyApi.UsersSavedTracksResponse;
+    }),
+    pause: procedure.mutation(async ({ ctx, input }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/player/pause`, {
+            method: 'PUT',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json());
-        }),
-    play: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .mutation(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player/play`, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+        return await res.json();
+    }),
+    play: procedure.mutation(async ({ ctx, input }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/player/play`, {
+            method: 'PUT',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json());
-        }),
-    next: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .mutation(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player/next`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+        return await res.json();
+    }),
+    next: procedure.mutation(async ({ ctx }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/player/next`, {
+            method: 'POST',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json());
-        }),
-    previous: procedure
-        .input(
-            z.object({
-                access_token: z.string(),
-            })
-        )
-        .mutation(async ({ input }) => {
-            const res = await fetch(`${API_ENDPOINT}/me/player/previous`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${input.access_token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
+        return await res.json();
+    }),
+    previous: procedure.mutation(async ({ ctx }) => {
+        const res = await fetch(`${API_ENDPOINT}/me/player/previous`, {
+            method: 'POST',
+            headers: {
+                // @ts-expect-error
+                Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-            return (await res.json());
-        }),
+        return await res.json();
+    }),
 });
 
 // export type definition of API

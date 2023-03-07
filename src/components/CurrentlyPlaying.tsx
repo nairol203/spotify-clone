@@ -1,14 +1,11 @@
-import { faBackwardStep, faBars, faForwardStep, faPause, faPlay, faRepeat, faShuffle } from '@fortawesome/free-solid-svg-icons';
+import { faBackwardStep, faForwardStep, faPause, faPlay, faRepeat, faShuffle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 export default function CurrentlyPlaying() {
-	const { data: session } = useSession();
-	// @ts-expect-error
-	const currentlyPlaying = trpc.currentlyPlaying.useQuery({ access_token: session?.user?.access_token }, { refetchInterval: 1000 });
+	const currentlyPlaying = trpc.currentlyPlaying.useQuery(undefined, { refetchInterval: 1000 });
 	const pause = trpc.pause.useMutation();
 	const play = trpc.play.useMutation();
 	const next = trpc.next.useMutation();
@@ -16,11 +13,9 @@ export default function CurrentlyPlaying() {
 
 	const togglePlay = () => {
 		if (currentlyPlaying.data?.is_playing) {
-			// @ts-expect-error
-			pause.mutate({ access_token: session?.user?.access_token });
+			pause.mutate();
 		} else {
-			// @ts-expect-error
-			play.mutate({ access_token: session?.user?.access_token });
+			play.mutate();
 		}
 	};
 
@@ -69,10 +64,7 @@ export default function CurrentlyPlaying() {
 						</button>
 						<button
 							title='Zurück'
-							onClick={
-								// @ts-expect-error
-								() => previous.mutate({ access_token: session?.user?.access_token })
-							}
+							onClick={() => previous.mutate()}
 						>
 							<FontAwesomeIcon height={25} width={25} icon={faBackwardStep} className='text-gray-400 hover:text-white' />
 						</button>
@@ -81,10 +73,7 @@ export default function CurrentlyPlaying() {
 						</button>
 						<button
 							title='Weiter'
-							onClick={
-								// @ts-expect-error
-								() => next.mutate({ access_token: session?.user?.access_token })
-							}
+							onClick={() => next.mutate()}
 						>
 							<FontAwesomeIcon height={25} width={25} icon={faForwardStep} className='text-gray-400 hover:text-white' />
 						</button>

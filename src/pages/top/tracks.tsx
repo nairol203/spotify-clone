@@ -3,7 +3,6 @@ import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trpc } from '@lib/trpc';
 import useAudio from '@lib/useAudio';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
@@ -11,10 +10,8 @@ import { z } from 'zod';
 import { msToString } from '../../lib/helpers';
 
 export default function Home() {
-	const { data: session } = useSession();
 	const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
-	// @ts-expect-error
-	const topTracks = trpc.topTracks.useQuery({ access_token: session?.user?.access_token, range });
+	const topTracks = trpc.topTracks.useQuery({ range });
 	const [active, setActive] = useState<string | null>(null);
 	const { playing, toggle } = useAudio();
 

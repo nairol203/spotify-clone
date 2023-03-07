@@ -1,15 +1,12 @@
 import { SkeletonObjectDetailed } from '@components/SkeletonObject';
 import { calcTime, msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 export default function Playlist() {
-	const { data: session } = useSession();
 	const router = useRouter();
-	// @ts-expect-error
-	const playlist = trpc.playlist.useQuery({ access_token: session?.user?.access_token, playlist_id: router.query['id']?.[0] });
+	const playlist = trpc.playlist.useQuery({ playlist_id: router.query['id']?.[0] as string });
 
 	if (!playlist.data)
 		return (
