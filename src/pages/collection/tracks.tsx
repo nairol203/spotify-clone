@@ -1,7 +1,7 @@
-import { SkeletonObject } from '@components/SkeletonObject';
+import { SkeletonObjectDetailed } from '@components/SkeletonObject';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { msToString } from '@lib/helpers';
+import { calcTime, msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -18,24 +18,33 @@ export default function Tracks() {
 					<div className='skeleton relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'></div>
 					<div className='grid gap-2 md:gap-4'>
 						<h1 className='skeleton text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>LieblinGssonGs</h1>
+						<span className='skeleton'>Lorem, ipsum.</span>
 					</div>
 				</div>
 				<div>
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
-					<SkeletonObject type='track' ranking />
+					<div className='grid grid-cols-[1.25rem_6fr_1fr] items-center gap-4 px-4 py-2 text-gray-400 lg:grid-cols-[1.25rem_6fr_4fr_3fr_1fr]'>
+						<span>#</span>
+						<span>Titel</span>
+						<span className='hidden lg:block'>Album</span>
+						<span className='hidden lg:block'>Hinzugefügt am</span>
+						<span className='flex justify-end'>Dauer</span>
+					</div>
+					<div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailed type='track' ranking />
 				</div>
 			</div>
 		);
@@ -48,15 +57,27 @@ export default function Tracks() {
 				</div>
 				<div className='grid gap-2 md:gap-4'>
 					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>Lieblingssongs</h1>
+					<span>{new Intl.NumberFormat('de-DE').format(savedTracks.data.total)} Songs</span>
 				</div>
 			</div>
 			<div>
+				<div className='grid grid-cols-[1.25rem_6fr_1fr] items-center gap-4 px-4 py-2 text-gray-400 lg:grid-cols-[1.25rem_6fr_4fr_3fr_1fr]'>
+					<span className='flex justify-center'>#</span>
+					<span>Titel</span>
+					<span className='hidden lg:block'>Album</span>
+					<span className='hidden lg:block'>Hinzugefügt am</span>
+					<span className='flex justify-end'>Dauer</span>
+				</div>
+				<div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
 				{savedTracks.data.items.map(
 					(track, index) =>
 						track.track && (
-							<div className='flex  items-center justify-between gap-2 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={track?.track?.id}>
+							<div
+								className='grid grid-cols-[1.25rem_6fr_1fr] items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10 lg:grid-cols-[1.25rem_6fr_4fr_3fr_1fr]'
+								key={track?.track?.id}
+							>
+								<span className='flex justify-center'>{index + 1}</span>
 								<div className='flex items-center gap-4'>
-									<span className={`flex w-5 justify-center`}>{index + 1}</span>
 									<a href={track?.track?.external_urls.spotify} target='_blank' rel='noreferrer'>
 										<Image className='aspect-square max-w-none rounded-sm' src={track?.track?.album.images?.[0].url} height={50} width={50} alt='Album Cover' />
 									</a>
@@ -75,7 +96,17 @@ export default function Tracks() {
 										</div>
 									</div>
 								</div>
-								<span className='sm:mr-2'>{msToString(track?.track?.duration_ms)}</span>
+								<div className='hidden lg:flex'>
+									<a className=' hover:underline' href={track.track.album.external_urls.spotify} target='_blank' rel='noreferrer'>
+										{track.track.album.name}
+									</a>
+								</div>
+								<span className='hidden lg:block'>
+									{new Date().getDate() - new Date(track.added_at).getDate() < 2.419e9
+										? new Date(track.added_at).toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
+										: calcTime(new Date(track.added_at))}
+								</span>
+								<span className='flex justify-end sm:mr-2'>{msToString(track.track.duration_ms)}</span>
 							</div>
 						)
 				)}
