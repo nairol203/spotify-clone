@@ -1,8 +1,5 @@
 import { SkeletonObject } from '@components/SkeletonObject';
-import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trpc } from '@lib/trpc';
-import useAudio from '@lib/useAudio';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -13,8 +10,6 @@ import { msToString } from '../../lib/helpers';
 export default function Home() {
 	const [range, setRange] = useState<z.infer<typeof SPOTIFY_RANGE>>('short_term');
 	const topTracks = trpc.topTracks.useQuery({ range });
-	const [active, setActive] = useState<string | null>(null);
-	const { playing, toggle } = useAudio();
 
 	return (
 		<div className='grid gap-4 py-4'>
@@ -39,16 +34,9 @@ export default function Home() {
 						<div
 							className='flex  items-center justify-between gap-2 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10'
 							key={track.id + index}
-							onMouseEnter={() => setActive(track.id)}
-							onMouseLeave={() => setActive(null)}
 						>
 							<div className='flex items-center gap-4' key={track.id}>
-								<div className='relative flex items-center'>
-									<span className={`${active === track.id && 'absolute hidden'} flex w-5 justify-center`}>{index + 1}</span>
-									<button className={`${active !== track.id && 'absolute hidden'}`} onClick={() => toggle(track.preview_url)}>
-										<FontAwesomeIcon icon={playing ? faPause : faPlay} width={20} height={20} />
-									</button>
-								</div>
+								<span className="flex w-5 justify-center">{index + 1}</span>
 								<Image className='aspect-square max-w-none rounded-sm' src={track.album.images[0].url} height={50} width={50} alt='Album Cover' />
 								<div>
 								<Link href={`/track/${track.id}`} className="hover:underline"><h3>{track.name}</h3></Link>
