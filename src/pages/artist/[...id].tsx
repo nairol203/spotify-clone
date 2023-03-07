@@ -29,13 +29,17 @@ export default function Artist() {
 					</div>
 				</div>
 				<div className='grid gap-2'>
-					<h2 className='skeleton'>Lorem, ipsum.</h2>
+					<div className='flex'>
+						<h2 className='skeleton'>Lorem, ipsum.</h2>
+					</div>
 					<div>
 						<SkeletonObjectDynamic count={5} type='track' ranking />
 					</div>
 				</div>
 				<div className='grid gap-4'>
-					<h2 className='skeleton'>Lorem, ipsum.</h2>
+					<div className='flex'>
+						<h2 className='skeleton'>Lorem, ipsum.</h2>
+					</div>
 					<div className='flex gap-2'>
 						<button className='skeleton secondary-button' disabled>
 							Beliebte Veröffentlichungen
@@ -52,13 +56,17 @@ export default function Artist() {
 					</div>
 				</div>
 				<div className='grid gap-2'>
-					<h2 className='skeleton'>Lorem, ipsum.</h2>
+					<div className='flex'>
+						<h2 className='skeleton'>Lorem, ipsum.</h2>
+					</div>
 					<div className='flex gap-4'>
 						<SkeletonObjectDynamic count={8} type='albumCard' />
 					</div>
 				</div>
 				<div className='grid gap-2'>
-					<h2 className='skeleton'>Lorem, ipsum.</h2>
+					<div className='flex'>
+						<h2 className='skeleton'>Lorem, ipsum.</h2>
+					</div>
 					<div className='flex gap-4'>
 						<SkeletonObjectDynamic count={8} type='albumCard' />
 					</div>
