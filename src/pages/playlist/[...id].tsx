@@ -40,7 +40,7 @@ export default function Playlist() {
 			</div>
 		);
 
-	if (!playlist.data.name) return <NotFound />
+	if (!playlist.data.name) return <NotFound />;
 
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>
@@ -81,7 +81,9 @@ export default function Playlist() {
 								<div className='flex items-center gap-4'>
 									<Image className='aspect-square max-w-none rounded-sm' src={item.track.album.images?.[0]?.url} height={50} width={50} alt='Album Cover' />
 									<div>
-										<Link className='hover:underline' href={`/track/${item.track.id}`}><h3>{item.track.name}</h3></Link>
+										<Link className='hover:underline' href={`/track/${item.track.id}`}>
+											<h3>{item.track.name}</h3>
+										</Link>
 										<div className='flex flex-wrap items-center gap-x-1'>
 											{item.track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
 											{item.track.artists.map((artist, index) => (

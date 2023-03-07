@@ -8,12 +8,12 @@ import { Context } from './context';
 const t = initTRPC.context<Context>().create();
 
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-    if (!ctx.session || !ctx.session.user) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-    return next({
-        ctx,
-    });
+	if (!ctx.session || !ctx.session.user) {
+		throw new TRPCError({ code: 'UNAUTHORIZED' });
+	}
+	return next({
+		ctx,
+	});
 });
 
 // Base router and procedure helpers

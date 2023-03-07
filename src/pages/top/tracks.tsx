@@ -31,15 +31,14 @@ export default function Home() {
 			<div>
 				{topTracks.data ? (
 					topTracks.data.items.map((track, index) => (
-						<div
-							className='flex  items-center justify-between gap-2 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10'
-							key={track.id + index}
-						>
+						<div className='flex  items-center justify-between gap-2 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={track.id + index}>
 							<div className='flex items-center gap-4' key={track.id}>
-								<span className="flex w-5 justify-center">{index + 1}</span>
+								<span className='flex w-5 justify-center'>{index + 1}</span>
 								<Image className='aspect-square max-w-none rounded-sm' src={track.album.images[0].url} height={50} width={50} alt='Album Cover' />
 								<div>
-								<Link href={`/track/${track.id}`} className="hover:underline"><h3>{track.name}</h3></Link>
+									<Link href={`/track/${track.id}`} className='hover:underline'>
+										<h3>{track.name}</h3>
+									</Link>
 									<div className='flex flex-wrap items-center gap-x-1'>
 										{track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
 										{track.artists.map((artist, index) => (

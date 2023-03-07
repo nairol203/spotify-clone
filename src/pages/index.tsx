@@ -17,7 +17,9 @@ export default function Home() {
 							<div className='flex items-center gap-4'>
 								<Image className='aspect-square max-w-none rounded-sm' src={item.track.album.images[0].url} height={50} width={50} alt='Album Cover' />
 								<div>
-									<Link href={`/track/${item.track.id}`} className="hover:underline"><h3>{item.track.name}</h3></Link>
+									<Link href={`/track/${item.track.id}`} className='hover:underline'>
+										<h3>{item.track.name}</h3>
+									</Link>
 									<div className='flex flex-wrap items-center gap-1'>
 										{item.track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
 

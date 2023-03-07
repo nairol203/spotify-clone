@@ -62,19 +62,13 @@ export default function CurrentlyPlaying() {
 						<button onClick={() => null} disabled>
 							<FontAwesomeIcon height={15} width={15} icon={faShuffle} className='text-gray-400 hover:text-white' />
 						</button>
-						<button
-							title='Zurück'
-							onClick={() => previous.mutate()}
-						>
+						<button title='Zurück' onClick={() => previous.mutate()}>
 							<FontAwesomeIcon height={25} width={25} icon={faBackwardStep} className='text-gray-400 hover:text-white' />
 						</button>
 						<button title={currentlyPlaying.data.is_playing ? 'Pause' : 'Play'} onClick={togglePlay} className='rounded-full  bg-white p-1.5'>
 							<FontAwesomeIcon height={25} width={25} icon={currentlyPlaying.data.is_playing ? faPause : faPlay} className=' text-black' />
 						</button>
-						<button
-							title='Weiter'
-							onClick={() => next.mutate()}
-						>
+						<button title='Weiter' onClick={() => next.mutate()}>
 							<FontAwesomeIcon height={25} width={25} icon={faForwardStep} className='text-gray-400 hover:text-white' />
 						</button>
 						<button onClick={() => null} disabled>
