@@ -11,6 +11,7 @@ export const authOptions: AuthOptions = {
     ],
     callbacks: {
         jwt: async ({ token, account }) => {
+            console.log(token,account)
             if (account) {
                 return {
                     access_token: account.access_token,
@@ -50,6 +51,7 @@ export const authOptions: AuthOptions = {
             }
         },
         session: async ({ session, token }) => {
+            session.user.id = token.sub as string;
             session.user.refresh_token = token.refresh_token as string;
             session.user.access_token = token.access_token as string;
             return session;

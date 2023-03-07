@@ -3,6 +3,7 @@ import { calcTime, msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import NotFound from '../404';
 
 export default function Playlist() {
 	const router = useRouter();
@@ -51,6 +52,8 @@ export default function Playlist() {
 				</div>
 			</div>
 		);
+
+	if (!playlist.data.name) return <NotFound />
 
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>

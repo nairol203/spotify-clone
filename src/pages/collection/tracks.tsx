@@ -45,7 +45,7 @@ export default function Tracks() {
 				</div>
 			</div>
 		);
-
+		
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>
 			<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>

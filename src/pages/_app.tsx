@@ -7,6 +7,7 @@ import '../styles/globals.css';
 import CurrentlyPlaying from '@components/CurrentlyPlaying';
 import { SessionProvider } from 'next-auth/react';
 import LeftNavBar from '@components/LeftNavBar';
+import UserDropdown from '@components/UserDropdown';
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 	return (
@@ -38,7 +39,8 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 				</div>
 				<div className='overflow-y-auto md:grid md:grid-cols-[15rem_1fr]'>
 					<LeftNavBar />
-					<main className='overflow-y-auto'>
+					<main className='overflow-y-auto relative'>
+						<UserDropdown />
 						<div className='mx-4'>
 							<Component {...pageProps} />
 							<Footer />
