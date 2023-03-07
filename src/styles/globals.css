@@ -54,9 +54,9 @@
 		@apply relative animate-pulse before:absolute before:inset-0 before:rounded-md  before:bg-darkMode-tertiary;
 	}
 	.primary-button {
-		@apply rounded-md bg-white py-1.5 px-3 text-sm text-black duration-200 ease-in  disabled:cursor-not-allowed disabled:text-opacity-40;
+		@apply rounded-full bg-white py-1.5 px-3 text-sm text-black duration-200 ease-in  disabled:cursor-not-allowed disabled:text-opacity-40;
 	}
 	.secondary-button {
-		@apply rounded-md  bg-darkMode-tertiary py-1.5 px-3  text-sm text-darkMode-text  duration-200 ease-in  hover:bg-darkMode-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-darkMode-tertiary;
+		@apply rounded-full  bg-darkMode-tertiary py-1.5 px-3  text-sm text-darkMode-text  duration-200 ease-in  hover:bg-darkMode-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-darkMode-tertiary;
 	}
 }

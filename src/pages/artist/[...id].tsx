@@ -10,9 +10,9 @@ import { z } from 'zod';
 
 export default function Artist() {
 	const router = useRouter();
-	const [includedGroups, setIncludedGroups] = useState<z.infer<typeof ALBUM_GROUPS>>('album');
+	const [includedGroups, setIncludedGroups] = useState<z.infer<typeof ALBUM_GROUPS>[]>(['album', 'single']);
 	const { data } = trpc.artist.useQuery({ artistId: router.query['id']?.[0] as string });
-	const { data: dataAlbums } = trpc.artistAlbums.useQuery({ artistId: router.query['id']?.[0] as string, includeGroups: [includedGroups] });
+	const { data: dataAlbums } = trpc.artistAlbums.useQuery({ artistId: router.query['id']?.[0] as string, includeGroups: includedGroups });
 	const { data: dataAlbumsAppearsOn } = trpc.artistAlbums.useQuery({ artistId: router.query['id']?.[0] as string, includeGroups: ['appears_on'] });
 
 	if (!data || !dataAlbums || !dataAlbumsAppearsOn)
@@ -34,7 +34,7 @@ export default function Artist() {
 						<SkeletonObjectDynamic count={5} type='track' ranking />
 					</div>
 				</div>
-				<div className='grid gap-2'>
+				<div className='grid gap-4'>
 					<h2 className='skeleton'>Lorem, ipsum.</h2>
 					<div className='flex gap-2'>
 						<button className='skeleton secondary-button' disabled>
@@ -118,34 +118,45 @@ export default function Artist() {
 					))}
 				</div>
 			</div>
-			<div className='grid gap-2'>
-				<h2>Beliebte Veröffentlichungen</h2>
+			<div className='grid gap-4'>
+				<h2>Diskografie</h2>
 				<div className='flex flex-wrap gap-2'>
-					<button className='secondary-button' disabled>
+					<button
+						className={`${includedGroups.includes('album') && includedGroups.includes('single') ? 'primary-button' : 'secondary-button'}`}
+						onClick={() => setIncludedGroups(['album', 'single'])}
+					>
 						Beliebte Veröffentlichungen
 					</button>
-					<button className={`${includedGroups === 'album' ? 'primary-button' : 'secondary-button'}`} onClick={() => setIncludedGroups('album')}>
+					<button
+						className={`${includedGroups.length === 1 && includedGroups[0] === 'album' ? 'primary-button' : 'secondary-button'}`}
+						onClick={() => setIncludedGroups(['album'])}
+					>
 						Alben
 					</button>
-					<button className={`${includedGroups === 'single' ? 'primary-button' : 'secondary-button'}`} onClick={() => setIncludedGroups('single')}>
+					<button
+						className={`${includedGroups.length === 1 && includedGroups[0] === 'single' ? 'primary-button' : 'secondary-button'}`}
+						onClick={() => setIncludedGroups(['single'])}
+					>
 						Singles und EPs
 					</button>
 				</div>
 				<div className='flex gap-4'>
-					{dataAlbums.items.map((album, index) => (
-						<Link
-							href={`/album/${album.id}`}
-							key={album.id + index}
-							className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
-						>
-							<Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
-							<h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{album.name}</h3>
-							<div className='flex gap-1.5'>
-								<span>{new Date(album.release_date).getFullYear()}</span>
-								<span className="capitalize before:mr-1.5 before:content-['•']">{album.album_type}</span>
-							</div>
-						</Link>
-					))}
+					{dataAlbums.items
+						.sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
+						.map((album, index) => (
+							<Link
+								href={`/album/${album.id}`}
+								key={album.id + index}
+								className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
+							>
+								<Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
+								<h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{album.name}</h3>
+								<div className='flex gap-1.5'>
+									<span>{new Date(album.release_date).getFullYear()}</span>
+									<span className="capitalize before:mr-1.5 before:content-['•']">{album.album_type}</span>
+								</div>
+							</Link>
+						))}
 				</div>
 			</div>
 			<div className='grid gap-2'>
