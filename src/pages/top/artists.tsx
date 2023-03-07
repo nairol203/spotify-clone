@@ -1,6 +1,7 @@
 import { SkeletonObject } from '@components/SkeletonObject';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
 import { z } from 'zod';
@@ -28,13 +29,13 @@ export default function Home() {
 			</div>
 			<div>
 				{topTracks.data ? (
-					topTracks.data.items.map((item, index) => (
-						<div className='flex items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={item.id}>
+					topTracks.data.items.map((artist, index) => (
+						<div className='flex items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={artist.id}>
 							<div className='flex w-5 justify-center'>{index + 1}</div>
-							<a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
-								<Image className='rounded-sms aspect-square max-w-none' src={item.images[0].url} height={50} width={50} alt='Album Cover' />
-							</a>
-							<h3>{item.name}</h3>
+							<Image className='rounded-sms aspect-square max-w-none' src={artist.images[0].url} height={50} width={50} alt='Album Cover' />
+							<Link className='hover:underline' href={`/artist/${artist.id}`}>
+								<h3>{artist.name}</h3>
+							</Link>
 						</div>
 					))
 				) : (

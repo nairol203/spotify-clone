@@ -77,11 +77,11 @@ export const appRouter = router({
     playlist: procedure
         .input(
             z.object({
-                playlist_id: z.string(),
+                playlistId: z.string(),
             })
         )
         .query(async ({ ctx, input }) => {
-            const res = await fetch(`${API_ENDPOINT}/playlists/${input.playlist_id}`, {
+            const res = await fetch(`${API_ENDPOINT}/playlists/${input.playlistId}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${ctx.session?.user?.access_token}`,
@@ -94,11 +94,11 @@ export const appRouter = router({
     profile: procedure
         .input(
             z.object({
-                user_id: z.string(),
+                userId: z.string(),
             })
         )
         .query(async ({ ctx, input }) => {
-            const res = await fetch(`${API_ENDPOINT}/users/${input.user_id}`, {
+            const res = await fetch(`${API_ENDPOINT}/users/${input.userId}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${ctx.session?.user?.access_token}`,
@@ -107,6 +107,57 @@ export const appRouter = router({
             });
 
             return (await res.json()) as SpotifyApi.UserProfileResponse;
+        }),
+    album: procedure
+        .input(
+            z.object({
+                albumId: z.string(),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            const res = await fetch(`${API_ENDPOINT}/albums/${input.albumId}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            return (await res.json()) as SpotifyApi.AlbumObjectFull;
+        }),
+    artist: procedure
+        .input(
+            z.object({
+                artistId: z.string(),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            const res = await fetch(`${API_ENDPOINT}/artists/${input.artistId}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            return (await res.json()) as SpotifyApi.ArtistObjectFull;
+        }),
+    track: procedure
+        .input(
+            z.object({
+                trackId: z.string(),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            const res = await fetch(`${API_ENDPOINT}/tracks/${input.trackId}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            return (await res.json()) as SpotifyApi.TrackObjectFull;
         }),
     savedTracks: procedure.query(async ({ ctx, input }) => {
         const res = await fetch(`${API_ENDPOINT}/me/tracks`, {

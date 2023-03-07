@@ -21,14 +21,14 @@ export default function UserDropdown() {
                 </button>
                 {active && (
                     <div className='absolute top-10 right-0 flex w-44 flex-col rounded-sm bg-black p-1'>
-                        <a className='flex justify-between items-center rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href='https://www.spotify.com/us/account/overview' target='_blank' rel='noreferrer'>
+                        <a onClick={() => setActive(false)} className='flex justify-between items-center rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href='https://www.spotify.com/us/account/overview' target='_blank' rel='noreferrer'>
                             <span>Spotify Konto</span>
                             <FontAwesomeIcon height={15} width={15} icon={faArrowUpRightFromSquare} />
                         </a>
-                        <Link className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href={`/user/${session.user.id}`}>
+                        <Link onClick={() => setActive(false)} className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href={`/user/${session.user.id}`}>
                             Profil
                         </Link>
-                        <Link className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href='/settings'>
+                        <Link onClick={() => setActive(false)} className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href='/settings'>
                             Einstellungen
                         </Link>
                         <div className='mx-auto h-[0.05rem] my-0.5 w-11/12 rounded-full bg-gray-500' />

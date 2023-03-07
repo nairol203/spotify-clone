@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { calcTime, msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Tracks() {
 	const savedTracks = trpc.savedTracks.useQuery();
@@ -67,43 +68,41 @@ export default function Tracks() {
 				</div>
 				<div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
 				{savedTracks.data.items.map(
-					(track, index) =>
-						track.track && (
+					(item, index) =>
+						item.track && (
 							<div
 								className='grid grid-cols-[1.25rem_6fr_1fr] items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10 lg:grid-cols-[1.25rem_6fr_4fr_3fr_1fr]'
-								key={track?.track?.id}
+								key={item.track.id}
 							>
 								<span className='flex justify-center'>{index + 1}</span>
 								<div className='flex items-center gap-4'>
-									<a href={track?.track?.external_urls.spotify} target='_blank' rel='noreferrer'>
-										<Image className='aspect-square max-w-none rounded-sm' src={track?.track?.album.images?.[0].url} height={50} width={50} alt='Album Cover' />
-									</a>
+									<Image className='aspect-square max-w-none rounded-sm' src={item.track.album.images?.[0].url} height={50} width={50} alt='Album Cover' />
 									<div>
-										<h3>{track?.track?.name}</h3>
+										<Link className='hover:underline' href={`/track/${item.track.id}`}><h3>{item.track.name}</h3></Link>
 										<div className='flex flex-wrap items-center gap-x-1'>
-											{track?.track?.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
-											{track?.track?.artists.map((artist, index) => (
+											{item.track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
+											{item.track.artists.map((artist, index) => (
 												<div className='text-gray-300' key={artist.id + index}>
-													<a className='text-sm hover:underline' href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id}>
+													<Link className='text-sm hover:underline' href={`/artist/${artist.id}`} key={artist.id}>
 														{artist.name}
-													</a>
-													{index < (track?.track?.artists.length ?? 0) - 1 && ','}
+													</Link>
+													{index < (item.track.artists.length ?? 0) - 1 && ','}
 												</div>
 											))}
 										</div>
 									</div>
 								</div>
 								<div className='hidden lg:flex'>
-									<a className=' hover:underline' href={track.track.album.external_urls.spotify} target='_blank' rel='noreferrer'>
-										{track.track.album.name}
-									</a>
+									<Link className=' hover:underline' href={`/album/${item.track.album.id}`}>
+										{item.track.album.name}
+									</Link>
 								</div>
 								<span className='hidden lg:block'>
-									{new Date().getDate() - new Date(track.added_at).getDate() < 2.419e9
-										? new Date(track.added_at).toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
-										: calcTime(new Date(track.added_at))}
+									{new Date().getDate() - new Date(item.added_at).getDate() < 2.419e9
+										? new Date(item.added_at).toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
+										: calcTime(new Date(item.added_at))}
 								</span>
-								<span className='flex justify-end sm:mr-2'>{msToString(track.track.duration_ms)}</span>
+								<span className='flex justify-end sm:mr-2'>{msToString(item.track.duration_ms)}</span>
 							</div>
 						)
 				)}

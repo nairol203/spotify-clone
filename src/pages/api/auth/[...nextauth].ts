@@ -11,7 +11,6 @@ export const authOptions: AuthOptions = {
     ],
     callbacks: {
         jwt: async ({ token, account }) => {
-            console.log(token,account)
             if (account) {
                 return {
                     access_token: account.access_token,

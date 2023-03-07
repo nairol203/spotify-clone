@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trpc } from '@lib/trpc';
 import useAudio from '@lib/useAudio';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { SPOTIFY_RANGE } from 'src/server/routers/_app';
 import { z } from 'zod';
@@ -34,39 +35,37 @@ export default function Home() {
 			</div>
 			<div>
 				{topTracks.data ? (
-					topTracks.data.items.map((item, index) => (
+					topTracks.data.items.map((track, index) => (
 						<div
 							className='flex  items-center justify-between gap-2 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10'
-							key={item.id + index}
-							onMouseEnter={() => setActive(item.id)}
+							key={track.id + index}
+							onMouseEnter={() => setActive(track.id)}
 							onMouseLeave={() => setActive(null)}
 						>
-							<div className='flex items-center gap-4' key={item.id}>
+							<div className='flex items-center gap-4' key={track.id}>
 								<div className='relative flex items-center'>
-									<span className={`${active === item.id && 'absolute hidden'} flex w-5 justify-center`}>{index + 1}</span>
-									<button className={`${active !== item.id && 'absolute hidden'}`} onClick={() => toggle(item.preview_url)}>
+									<span className={`${active === track.id && 'absolute hidden'} flex w-5 justify-center`}>{index + 1}</span>
+									<button className={`${active !== track.id && 'absolute hidden'}`} onClick={() => toggle(track.preview_url)}>
 										<FontAwesomeIcon icon={playing ? faPause : faPlay} width={20} height={20} />
 									</button>
 								</div>
-								<a href={item.external_urls.spotify} target='_blank' rel='noreferrer'>
-									<Image className='aspect-square max-w-none rounded-sm' src={item.album.images[0].url} height={50} width={50} alt='Album Cover' />
-								</a>
+								<Image className='aspect-square max-w-none rounded-sm' src={track.album.images[0].url} height={50} width={50} alt='Album Cover' />
 								<div>
-									<h3>{item.name}</h3>
+								<Link href={`/track/${track.id}`} className="hover:underline"><h3>{track.name}</h3></Link>
 									<div className='flex flex-wrap items-center gap-x-1'>
-										{item.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
-										{item.artists.map((artist, index) => (
+										{track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
+										{track.artists.map((artist, index) => (
 											<div className='text-gray-300' key={artist.id + index}>
-												<a className='text-sm hover:underline' href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id}>
+												<Link className='text-sm hover:underline' href={`/artist/${artist.id}`} key={artist.id}>
 													{artist.name}
-												</a>
-												{index < item.artists.length - 1 && ','}
+												</Link>
+												{index < track.artists.length - 1 && ','}
 											</div>
 										))}
 									</div>
 								</div>
 							</div>
-							<span className='sm:mr-2'>{msToString(item.duration_ms)}</span>
+							<span className='sm:mr-2'>{msToString(track.duration_ms)}</span>
 						</div>
 					))
 				) : (
