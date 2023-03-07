@@ -2,6 +2,7 @@ import { SkeletonObjectDetailed } from '@components/SkeletonObject';
 import { calcTime, msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import NotFound from '../404';
 
@@ -66,9 +67,9 @@ export default function Playlist() {
 					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{playlist.data.name}</h1>
 					<span className='text-sm text-gray-300'>{playlist.data.description}</span>
 					<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
-						<a href={playlist.data.owner.external_urls.spotify} target='_blank' rel='noreferrer' className='hover:underline'>
+						<Link href={`/user/${playlist.data.owner.id}`} className='hover:underline'>
 							{playlist.data.owner.display_name}
-						</a>
+						</Link>
 						<span className="before:mr-1.5 before:content-['•']">{new Intl.NumberFormat('de-DE').format(playlist.data.followers?.total)} Likes</span>
 						<span className="before:mr-1.5 before:content-['•']">{new Intl.NumberFormat('de-DE').format(playlist.data.tracks.total)} Songs</span>
 					</div>

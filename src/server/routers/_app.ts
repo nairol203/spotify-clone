@@ -91,6 +91,23 @@ export const appRouter = router({
 
             return (await res.json()) as SpotifyApi.PlaylistObjectFull;
         }),
+    profile: procedure
+        .input(
+            z.object({
+                user_id: z.string(),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            const res = await fetch(`${API_ENDPOINT}/users/${input.user_id}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            return (await res.json()) as SpotifyApi.UserProfileResponse;
+        }),
     savedTracks: procedure.query(async ({ ctx, input }) => {
         const res = await fetch(`${API_ENDPOINT}/me/tracks`, {
             method: 'GET',

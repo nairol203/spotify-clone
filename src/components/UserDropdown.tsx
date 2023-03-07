@@ -2,6 +2,7 @@ import { faArrowUpRightFromSquare, faCaretDown, faCaretUp } from '@fortawesome/f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function UserDropdown() {
@@ -24,12 +25,12 @@ export default function UserDropdown() {
                             <span>Spotify Konto</span>
                             <FontAwesomeIcon height={15} width={15} icon={faArrowUpRightFromSquare} />
                         </a>
-                        <a className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href={`/user/${session.user.id}`}>
+                        <Link className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href={`/user/${session.user.id}`}>
                             Profil
-                        </a>
-                        <a className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href='/settings'>
+                        </Link>
+                        <Link className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href='/settings'>
                             Einstellungen
-                        </a>
+                        </Link>
                         <div className='mx-auto h-[0.05rem] my-0.5 w-11/12 rounded-full bg-gray-500' />
                         <button onClick={() => signOut()} className='flex rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10'>
                             Abmelden
