@@ -28,6 +28,66 @@ export default function Artist() {
                         </div>
                     </div>
                 </div>
+                <div className='grid gap-2'>
+                    <h2 className='skeleton'>Lorem, ipsum.</h2>
+                    <div>
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                        <SkeletonObject type='track' ranking />
+                    </div>
+                </div>
+                <div className='grid gap-2'>
+                    <h2 className='skeleton'>Lorem, ipsum.</h2>
+                    <div className='flex gap-4'>
+                        <button className='skeleton secondary-button' disabled>
+                            Beliebte Veröffentlichungen
+                        </button>
+                        <button className='skeleton secondary-button' disabled>
+                            Alben
+                        </button>
+                        <button className='skeleton secondary-button' disabled>
+                            Singles und EPs
+                        </button>
+                    </div>
+                    <div className='flex gap-4'>
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                    </div>
+                </div>
+                <div className='grid gap-2'>
+                    <h2 className='skeleton'>Lorem, ipsum.</h2>
+                    <div className='flex gap-4'>
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                    </div>
+                </div>
+                <div className='grid gap-2'>
+                    <h2 className='skeleton'>Lorem, ipsum.</h2>
+                    <div className='flex gap-4'>
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                        <SkeletonObject type='albumCard' />
+                    </div>
+                </div>
             </div>
         );
 
