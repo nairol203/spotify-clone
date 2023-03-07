@@ -1,4 +1,4 @@
-import { SkeletonObjectDetailed } from '@components/SkeletonObject';
+import { SkeletonObjectDetailedDynamic } from '@components/SkeletonObject';
 import { calcTime, msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
@@ -35,21 +35,7 @@ export default function Playlist() {
 						<span className='flex justify-end'>Dauer</span>
 					</div>
 					<div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailedDynamic count={15} type='track' ranking />
 				</div>
 			</div>
 		);

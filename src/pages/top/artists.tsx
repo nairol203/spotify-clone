@@ -1,4 +1,4 @@
-import { SkeletonObject } from '@components/SkeletonObject';
+import { SkeletonObjectDynamic } from '@components/SkeletonObject';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -39,23 +39,7 @@ export default function Home() {
 						</div>
 					))
 				) : (
-					<>
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-						<SkeletonObject type='album' ranking />
-					</>
+					<SkeletonObjectDynamic count={15} type='track' ranking />
 				)}
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { SkeletonObject } from '@components/SkeletonObject';
+import { SkeletonObjectDynamic } from '@components/SkeletonObject';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
@@ -31,11 +31,7 @@ export default function Artist() {
                 <div className='grid gap-2'>
                     <h2 className='skeleton'>Lorem, ipsum.</h2>
                     <div>
-                        <SkeletonObject type='track' ranking />
-                        <SkeletonObject type='track' ranking />
-                        <SkeletonObject type='track' ranking />
-                        <SkeletonObject type='track' ranking />
-                        <SkeletonObject type='track' ranking />
+                        <SkeletonObjectDynamic count={4} type='track' ranking />
                     </div>
                 </div>
                 <div className='grid gap-2'>
@@ -52,46 +48,40 @@ export default function Artist() {
                         </button>
                     </div>
                     <div className='flex gap-4'>
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
+                        <SkeletonObjectDynamic count={8} type='albumCard' />
                     </div>
                 </div>
                 <div className='grid gap-2'>
                     <h2 className='skeleton'>Lorem, ipsum.</h2>
                     <div className='flex gap-4'>
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
+                        <SkeletonObjectDynamic count={8} type='albumCard' />
                     </div>
                 </div>
                 <div className='grid gap-2'>
                     <h2 className='skeleton'>Lorem, ipsum.</h2>
                     <div className='flex gap-4'>
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
-                        <SkeletonObject type='albumCard' />
+                        <SkeletonObjectDynamic count={8} type='albumCard' />
                     </div>
                 </div>
             </div>
         );
 
     const { artist, topTracks, relatedArtists } = data;
+
+    function getGridClassByIndex(index: number): string | null {
+        const gridSizes = [
+            'grid',
+            'hidden sm:grid',
+            'hidden md:grid',
+            'hidden lg:grid',
+            'hidden xl:grid',
+            'hidden 2xl:grid',
+            'hidden 3xl:grid',
+            'hidden 4xl:grid',
+        ];
+
+        return index < gridSizes.length ? gridSizes[index] : 'hidden';
+    }
 
     return (
         <div className='mt-8 grid gap-4 md:py-4'>
@@ -139,7 +129,7 @@ export default function Artist() {
             </div>
             <div className='grid gap-2'>
                 <h2>Beliebte Veröffentlichungen</h2>
-                <div className='flex gap-4'>
+                <div className='flex flex-wrap gap-4'>
                     <button className='secondary-button' disabled>
                         Beliebte Veröffentlichungen
                     </button>
@@ -151,11 +141,11 @@ export default function Artist() {
                     </button>
                 </div>
                 <div className='flex gap-4'>
-                    {dataAlbums.items.slice(0, 8).map((album, index) => (
+                    {dataAlbums.items.map((album, index) => (
                         <Link
                             href={`/album/${album.id}`}
                             key={album.id + index}
-                            className='grid max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10'
+                            className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
                         >
                             <Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
                             <h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{album.name}</h3>
@@ -174,7 +164,7 @@ export default function Artist() {
                         <Link
                             href={`/artist/${artist.id}`}
                             key={artist.id + index}
-                            className='grid max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10'
+                            className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
                         >
                             <Image src={artist.images[0].url} width={150} height={150} alt={`Album Cover from ${artist.name}`} className='aspect-square rounded-full' />
                             <h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{artist.name}</h3>
@@ -192,7 +182,7 @@ export default function Artist() {
                         <Link
                             href={`/album/${album.id}`}
                             key={album.id + index}
-                            className='grid max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10'
+                            className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
                         >
                             <Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
                             <h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{album.name}</h3>

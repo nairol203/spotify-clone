@@ -1,4 +1,4 @@
-import { SkeletonObjectDetailed } from '@components/SkeletonObject';
+import { SkeletonObjectDetailedDynamic } from '@components/SkeletonObject';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { calcTime, msToString } from '@lib/helpers';
@@ -28,21 +28,7 @@ export default function Tracks() {
 						<span className='flex justify-end'>Dauer</span>
 					</div>
 					<div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
-					<SkeletonObjectDetailed type='track' ranking />
+					<SkeletonObjectDetailedDynamic count={15} type='track' ranking />
 				</div>
 			</div>
 		);

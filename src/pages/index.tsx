@@ -1,4 +1,4 @@
-import { SkeletonObject } from '@components/SkeletonObject';
+import { SkeletonObjectDynamic } from '@components/SkeletonObject';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
@@ -36,23 +36,7 @@ export default function Home() {
 						</div>
 					))
 				) : (
-					<>
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-						<SkeletonObject type='track' />
-					</>
+					<SkeletonObjectDynamic count={15} type='track' ranking />
 				)}
 			</div>
 		</div>

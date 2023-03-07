@@ -155,6 +155,10 @@ export const appRouter = router({
                 },
             });
 
+            console.log(res.ok, res.status, res.statusText)
+            console.log(resTopTracks.ok, resTopTracks.status, resTopTracks.statusText)
+            console.log(resRelated.ok, resRelated.status, resRelated.statusText)
+
             return {
                 artist: await res.json() as SpotifyApi.ArtistObjectFull,
                 topTracks: await resTopTracks.json() as SpotifyApi.ArtistsTopTracksResponse,
@@ -176,6 +180,9 @@ export const appRouter = router({
                     'Content-Type': 'application/json',
                 },
             });
+
+            console.log(res.ok, res.status, res.statusText)
+
             return await res.json() as SpotifyApi.ArtistsAlbumsResponse;
         }),
     track: procedure

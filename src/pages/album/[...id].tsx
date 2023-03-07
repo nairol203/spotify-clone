@@ -1,4 +1,4 @@
-import { SkeletonObject } from '@components/SkeletonObject';
+import { SkeletonObjectDynamic } from '@components/SkeletonObject';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
@@ -31,21 +31,7 @@ export default function Album() {
                         <span className='flex justify-end'>Dauer</span>
                     </div>
                     <div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
-                    <SkeletonObject type='track' ranking />
+                    <SkeletonObjectDynamic count={15} type='track' ranking />
                 </div>
             </div>
         );
