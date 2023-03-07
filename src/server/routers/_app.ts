@@ -16,7 +16,6 @@ export const appRouter = router({
             const res = await fetch(`${API_ENDPOINT}/me/top/tracks?limit=${input.limit || 50}&time_range=${input.range}`, {
                 method: 'GET',
                 headers: {
-                    // @ts-expect-error
                     Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                     'Content-Type': 'application/json',
                 },
@@ -35,7 +34,6 @@ export const appRouter = router({
             const res = await fetch(`${API_ENDPOINT}/me/top/artists?limit=${input.limit || 50}&time_range=${input.range}`, {
                 method: 'GET',
                 headers: {
-                    // @ts-expect-error
                     Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                     'Content-Type': 'application/json',
                 },
@@ -48,7 +46,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/player/recently-played?limit=50`, {
             method: 'GET',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
@@ -60,7 +57,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/player/currently-playing`, {
             method: 'GET',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
@@ -72,7 +68,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/playlists`, {
             method: 'GET',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
@@ -90,7 +85,6 @@ export const appRouter = router({
             const res = await fetch(`${API_ENDPOINT}/playlists/${input.playlist_id}`, {
                 method: 'GET',
                 headers: {
-                    // @ts-expect-error
                     Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                     'Content-Type': 'application/json',
                 },
@@ -102,7 +96,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/tracks`, {
             method: 'GET',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
@@ -114,7 +107,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/player/pause`, {
             method: 'PUT',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
@@ -126,7 +118,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/player/play`, {
             method: 'PUT',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
@@ -138,7 +129,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/player/next`, {
             method: 'POST',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
@@ -150,7 +140,6 @@ export const appRouter = router({
         const res = await fetch(`${API_ENDPOINT}/me/player/previous`, {
             method: 'POST',
             headers: {
-                // @ts-expect-error
                 Authorization: `Bearer ${ctx.session?.user?.access_token}`,
                 'Content-Type': 'application/json',
             },
