@@ -8,7 +8,7 @@ export default function Home() {
 
 	return (
 		<div className='grid gap-4 py-4'>
-			<h3>Recently Played</h3>
+			<h1>Recently Played</h1>
 			<div>
 				{recentTracks.data ? (
 					recentTracks.data.items.map((item, index) => (
