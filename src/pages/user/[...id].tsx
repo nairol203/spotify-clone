@@ -12,7 +12,7 @@ export default function User() {
 				<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
 					<div className='skeleton relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'></div>
 					<div className='grid gap-2 md:gap-4'>
-						<span className='skeleton uppercase'>Profil</span>
+						<span className='skeleton'>Profil</span>
 						<h1 className='skeleton text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>LoremA iAsum.</h1>
 						<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
 							<span className='skeleton'>0 Follower*innen</span>
@@ -35,7 +35,7 @@ export default function User() {
 					/>
 				</div>
 				<div className='grid gap-2 md:gap-4'>
-					<span className='uppercase'>{profile.data.type}</span>
+					<span>{profile.data.type}</span>
 					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{profile.data.display_name}</h1>
 					<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
 						<span>{new Intl.NumberFormat('de-DE').format(profile.data.followers?.total ?? 0)} Follower*innen</span>

@@ -69,11 +69,11 @@ export default function Album() {
 					<div className='grid grid-cols-[1.25rem_6fr_1fr] items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={track.id}>
 						<span className='flex w-5 justify-center'>{index + 1}</span>
 						<div className='flex items-center gap-4'>
-							<a href={track.external_urls.spotify} target='_blank' rel='noreferrer'>
-								<Image className='aspect-square max-w-none rounded-sm' src={album.data.images?.[0]?.url} height={50} width={50} alt='Album Cover' />
-							</a>
+							<Image className='aspect-square max-w-none rounded-sm' src={album.data.images?.[0]?.url} height={50} width={50} alt='Album Cover' />
 							<div>
-								<h3>{track.name}</h3>
+								<Link className='hover:underline' href={`/track/${track.id}`}>
+									<h3>{track.name}</h3>
+								</Link>
 								<div className='flex flex-wrap items-center gap-x-1'>
 									{track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
 									{track.artists.map((artist, index) => (

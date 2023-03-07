@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function CurrentlyPlaying() {
 	const currentlyPlaying = trpc.currentlyPlaying.useQuery(undefined, { refetchInterval: 1000 });
@@ -36,17 +37,17 @@ export default function CurrentlyPlaying() {
 						/>
 					</div>
 					<div className='flex flex-col justify-center'>
-						<a className='hover:underline' href={currentlyPlaying.data?.item?.external_urls.spotify} target='_blank' rel='noreferrer'>
+						<Link className='hover:underline' href={`/track/${currentlyPlaying.data.item?.id}`}>
 							{currentlyPlaying.data?.item?.name}
-						</a>
+						</Link>
 						<div className='flex gap-1'>
 							{
 								// @ts-expect-error
 								currentlyPlaying.data?.item.artists.map((artist, index) => (
 									<div className='text-gray-300' key={artist.id + index}>
-										<a className='text-xs hover:underline' href={artist.external_urls.spotify} target='_blank' rel='noreferrer'>
+										<Link className='text-xs hover:underline' href={`/artist/${artist.id}`}>
 											{artist.name}
-										</a>
+										</Link>
 										{
 											// @ts-expect-error
 											index < currentlyPlaying.data?.item.artists.length - 1 && ','

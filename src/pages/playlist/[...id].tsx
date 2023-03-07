@@ -16,7 +16,7 @@ export default function Playlist() {
 				<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
 					<div className='skeleton relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'></div>
 					<div className='grid gap-2 md:gap-4'>
-						<span className='skeleton uppercase'>Öffentliche Playlist</span>
+						<span className='skeleton'>Öffentliche Playlist</span>
 						<h1 className='skeleton text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>LoremA iAsum dolor.</h1>
 						<span className='skeleton text-sm text-gray-300'>Lorem iAsum dolor sit amet.</span>
 						<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
@@ -49,7 +49,7 @@ export default function Playlist() {
 					<Image src={playlist.data.images[0]?.url} alt='Playlist Cover' fill sizes='8rem 11rem 15rem' className='object-cover' />
 				</div>
 				<div className='grid gap-2 md:gap-4'>
-					<span className='uppercase'>{playlist.data.public ? 'Öffentliche Playlist' : 'Private Playlist'}</span>
+					<span>{playlist.data.public ? 'Öffentliche Playlist' : 'Private Playlist'}</span>
 					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{playlist.data.name}</h1>
 					<span className='text-sm text-gray-300'>{playlist.data.description}</span>
 					<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>

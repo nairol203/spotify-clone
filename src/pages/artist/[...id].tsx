@@ -21,7 +21,7 @@ export default function Artist() {
 				<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
 					<div className='skeleton relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'></div>
 					<div className='grid gap-2 md:gap-4'>
-						<span className='skeleton uppercase'>Album</span>
+						<span className='skeleton'>Album</span>
 						<h1 className='skeleton text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>LoremA iAsum.</h1>
 						<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
 							<span className='skeleton'>Lorem ipsum dolor sit.</span>
@@ -89,7 +89,7 @@ export default function Artist() {
 					<Image src={artist.images?.[0]?.url} alt={`Album Cover from ${artist.name}`} fill sizes='8rem 11rem 15rem' className='rounded-full object-cover' />
 				</div>
 				<div className='grid gap-2 md:gap-4'>
-					<span className='uppercase'>{artist.type}</span>
+					<span>Künster*in</span>
 					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{artist.name}</h1>
 					<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
 						<span>{new Intl.NumberFormat('de-DE').format(artist.followers.total)} Follower*innen</span>
@@ -103,21 +103,13 @@ export default function Artist() {
 						<div className='grid grid-cols-[1.25rem_6fr_1fr] items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={track.id}>
 							<span className='flex w-5 justify-center'>{index + 1}</span>
 							<div className='flex items-center gap-4'>
-								<a href={track.external_urls.spotify} target='_blank' rel='noreferrer'>
-									<Image className='aspect-square max-w-none rounded-sm' src={track.album.images?.[0]?.url} height={50} width={50} alt='Album Cover' />
-								</a>
+								<Image className='aspect-square max-w-none rounded-sm' src={track.album.images?.[0]?.url} height={50} width={50} alt='Album Cover' />
 								<div>
-									<h3>{track.name}</h3>
+									<Link className='hover:underline' href={`/track/${track.id}`}>
+										<h3>{track.name}</h3>
+									</Link>
 									<div className='flex flex-wrap items-center gap-x-1'>
 										{track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
-										{track.artists.map((artist, index) => (
-											<div className='text-gray-300' key={artist.id + index}>
-												<Link className='text-sm hover:underline' href={`/artist/${artist.id}`} key={artist.id}>
-													{artist.name}
-												</Link>
-												{index < (track?.artists.length ?? 0) - 1 && ','}
-											</div>
-										))}
 									</div>
 								</div>
 							</div>
