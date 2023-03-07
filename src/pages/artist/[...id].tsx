@@ -36,7 +36,7 @@ export default function Artist() {
                 </div>
                 <div className='grid gap-2'>
                     <h2 className='skeleton'>Lorem, ipsum.</h2>
-                    <div className='flex gap-4'>
+                    <div className='flex gap-2'>
                         <button className='skeleton secondary-button' disabled>
                             Beliebte Veröffentlichungen
                         </button>
@@ -129,7 +129,7 @@ export default function Artist() {
             </div>
             <div className='grid gap-2'>
                 <h2>Beliebte Veröffentlichungen</h2>
-                <div className='flex flex-wrap gap-4'>
+                <div className='flex flex-wrap gap-2'>
                     <button className='secondary-button' disabled>
                         Beliebte Veröffentlichungen
                     </button>
