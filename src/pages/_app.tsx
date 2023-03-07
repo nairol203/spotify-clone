@@ -37,8 +37,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 					<NavBar />
 				</div>
 				<div className='overflow-y-auto md:grid md:grid-cols-[15rem_1fr]'>
-					{/* <LeftNavBar /> */}
-					<div></div>
+					<LeftNavBar />
 					<main className='overflow-y-auto'>
 						<div className='mx-4'>
 							<Component {...pageProps} />
@@ -46,8 +45,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 						</div>
 					</main>
 				</div>
-					<div></div>
-				{/* <CurrentlyPlaying /> */}
+				<CurrentlyPlaying />
 			</div>
 		</SessionProvider>
 	);

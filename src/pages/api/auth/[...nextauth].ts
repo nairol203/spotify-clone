@@ -18,36 +18,35 @@ export const authOptions: AuthOptions = {
                     refresh_token: account.refresh_token,
                     ...token
                 };
-            // } else if (Date.now() < (token.expires_at as number) * 1000) {
-            //     return token;
-            } else {
+            } else if (Date.now() < (token.expires_at as number) * 1000) {
                 return token;
-                // try {
-                //     const response = await fetch('https://accounts.spotify.com/api/token', {
-                //         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                //         body: new URLSearchParams({
-                //             client_id: process.env.SPOTIFY_CLIENT_ID as string,
-                //             client_secret: process.env.SPOTIFY_CLIENT_SECRET as string,
-                //             grant_type: 'refresh_token',
-                //             refresh_token: token.refresh_token as string,
-                //         }),
-                //         method: 'POST',
-                //     });
+            } else {
+                try {
+                    const response = await fetch('https://accounts.spotify.com/api/token', {
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({
+                            client_id: process.env.SPOTIFY_CLIENT_ID as string,
+                            client_secret: process.env.SPOTIFY_CLIENT_SECRET as string,
+                            grant_type: 'refresh_token',
+                            refresh_token: token.refresh_token as string,
+                        }),
+                        method: 'POST',
+                    });
 
-                //     const tokens = await response.json();
+                    const tokens = await response.json();
 
-                //     if (!response.ok) throw tokens;
+                    if (!response.ok) throw tokens;
 
-                //     return {
-                //         ...token,
-                //         access_token: tokens.access_token,
-                //         expires_at: Math.floor(Date.now() / 1000 + tokens.expires_in),
-                //         refresh_token: tokens.refresh_token ?? token.refresh_token,
-                //     };
-                // } catch (error) {
-                //     console.error('Error refreshing access token', error);
-                //     return { ...token, error: 'RefreshAccessTokenError' as const };
-                // }
+                    return {
+                        ...token,
+                        access_token: tokens.access_token,
+                        expires_at: Math.floor(Date.now() / 1000 + tokens.expires_in),
+                        refresh_token: tokens.refresh_token ?? token.refresh_token,
+                    };
+                } catch (error) {
+                    console.error('Error refreshing access token', error);
+                    return { ...token, error: 'RefreshAccessTokenError' as const };
+                }
             }
         },
         session: async ({ session, token }) => {

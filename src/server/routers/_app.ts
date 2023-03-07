@@ -42,7 +42,6 @@ export const appRouter = router({
             return (await res.json()) as SpotifyApi.UsersTopArtistsResponse;
         }),
     recentlyPlayed: procedure.query(async ({ ctx }) => {
-        console.log(ctx)
         const res = await fetch(`${API_ENDPOINT}/me/player/recently-played?limit=50`, {
             method: 'GET',
             headers: {
