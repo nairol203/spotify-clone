@@ -57,7 +57,7 @@ export default function Album() {
                     <Image src={album.data.images?.[0]?.url} alt={`Album Cover from ${album.data.name}`} fill sizes='8rem 11rem 15rem' className='object-cover' />
                 </div>
                 <div className='grid gap-2 md:gap-4'>
-                    <span className='uppercase'>{album.data.type}</span>
+                    <span className='uppercase'>{album.data.album_type}</span>
                     <h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{album.data.name}</h1>
                     <div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
                         <div className='flex gap-1'>

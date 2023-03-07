@@ -3,6 +3,7 @@ import { procedure, router } from '../trpc';
 
 export const API_ENDPOINT = 'https://api.spotify.com/v1';
 export const SPOTIFY_RANGE = z.enum(['short_term', 'medium_term', 'long_term']);
+export const ALBUM_GROUPS = z.enum(['album', 'single', 'appears_on', 'compilation']);
 
 export const appRouter = router({
     topTracks: procedure
@@ -139,8 +140,43 @@ export const appRouter = router({
                     'Content-Type': 'application/json',
                 },
             });
+            const resTopTracks = await fetch(`${API_ENDPOINT}/artists/${input.artistId}/top-tracks?country=DE`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const resRelated = await fetch(`${API_ENDPOINT}/artists/${input.artistId}/related-artists`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
 
-            return (await res.json()) as SpotifyApi.ArtistObjectFull;
+            return {
+                artist: await res.json() as SpotifyApi.ArtistObjectFull,
+                topTracks: await resTopTracks.json() as SpotifyApi.ArtistsTopTracksResponse,
+                relatedArtists: await resRelated.json() as SpotifyApi.ArtistsRelatedArtistsResponse,
+            };
+        }),
+    artistAlbums: procedure
+        .input(
+            z.object({
+                artistId: z.string(),
+                includeGroups: z.array(ALBUM_GROUPS)
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            const res = await fetch(`${API_ENDPOINT}/artists/${input.artistId}/albums?include_groups=${input.includeGroups.join(',')}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${ctx.session?.user?.access_token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return await res.json() as SpotifyApi.ArtistsAlbumsResponse;
         }),
     track: procedure
         .input(
