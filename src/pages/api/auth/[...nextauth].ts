@@ -49,11 +49,11 @@ export const authOptions: AuthOptions = {
             }
         },
         session: async ({ session, token }) => {
-            // @ts-expect-error
-            session.user.refresh_token = token.refresh_token;
-            // @ts-expect-error
-            session.user.access_token = token.access_token;
-            return session;
+            return {
+                ...session,
+                refresh_token: token.refresh_token,
+                access_token: token.access_token
+            };
         },
     },
 };
