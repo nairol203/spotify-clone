@@ -118,7 +118,7 @@ export default function Artist() {
 					))}
 				</div>
 			</div>
-			<div className='grid gap-4'>
+			{!!dataAlbums.items.length && <div className='grid gap-4'>
 				<h2>Diskografie</h2>
 				<div className='flex flex-wrap gap-2'>
 					<button
@@ -160,8 +160,8 @@ export default function Artist() {
 							</Link>
 						))}
 				</div>
-			</div>
-			<div className='grid gap-2'>
+			</div>}
+			{!!relatedArtists.artists.length && <div className='grid gap-2'>
 				<h2>Was anderen Fans gefällt</h2>
 				<div className='flex gap-4 overflow-x-auto'>
 					{relatedArtists.artists.slice(0, 8).map((artist, index) => (
@@ -180,8 +180,8 @@ export default function Artist() {
 						</Link>
 					))}
 				</div>
-			</div>
-			<div className='grid gap-2'>
+			</div>}
+			{!!dataAlbumsAppearsOn.items.length && <div className='grid gap-2'>
 				<h2>Enthalten in</h2>
 				<div className='flex gap-4 overflow-x-auto'>
 					{dataAlbumsAppearsOn.items.slice(0, 8).map((album, index) => (
@@ -201,7 +201,7 @@ export default function Artist() {
 						</Link>
 					))}
 				</div>
-			</div>
+			</div>}
 		</div>
 	);
 }
