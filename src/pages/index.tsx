@@ -20,11 +20,11 @@ export default function Home() {
 				<div>
 					{recentTracks.data ? recentTracks.data.items.map((item, index) => (
 						<div className='grid grid-cols-[6fr_1fr] lg:grid-cols-[7fr_2fr_1fr] items-center justify-between gap-2 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={item.track.id + index}>
-							<div className='flex items-center gap-4'>
+							<div className='flex items-center gap-4 overflow-hidden text-ellipsis whitespace-nowrap'>
 								<Image className='aspect-square max-w-none rounded-sm' src={item.track.album.images[0].url} height={50} width={50} alt='Album Cover' />
-								<div>
-									<Link href={`/track/${item.track.id}`} className='hover:underline'>
-										<h3>{item.track.name}</h3>
+								<div className='overflow-hidden text-ellipsis'>
+									<Link href={`/track/${item.track.id}`} className='hover:underline overflow-hidden text-ellipsis'>
+										<h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{item.track.name}</h3>
 									</Link>
 									<div className='flex flex-wrap items-center gap-1'>
 										{item.track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
