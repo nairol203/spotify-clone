@@ -45,8 +45,8 @@ export default function Playlist() {
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>
 			<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
-				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'>
-					<Image src={playlist.data.images[0]?.url} alt='Playlist Cover' fill sizes='8rem 11rem 15rem' className='object-cover' />
+				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60 aspect-square'>
+					<Image src={playlist.data.images[0]?.url} alt='Playlist Cover' fill sizes='8rem 11rem 15rem' className='object-cover aspect-square' />
 				</div>
 				<div className='grid gap-2 md:gap-4'>
 					<span>{playlist.data.public ? 'Öffentliche Playlist' : 'Private Playlist'}</span>
@@ -78,11 +78,11 @@ export default function Playlist() {
 								key={item.track.id}
 							>
 								<span className='flex w-5 justify-center'>{index + 1}</span>
-								<div className='flex items-center gap-4'>
+								<div className='flex items-center gap-4 overflow-hidden text-ellipsis whitespace-nowrap'>
 									<Image className='aspect-square max-w-none rounded-sm' src={item.track.album.images?.[0]?.url} height={50} width={50} alt='Album Cover' />
-									<div>
-										<Link className='hover:underline' href={`/track/${item.track.id}`}>
-											<h3>{item.track.name}</h3>
+									<div className='overflow-hidden text-ellipsis'>
+										<Link className='hover:underline overflow-hidden text-ellipsis' href={`/track/${item.track.id}`}>
+											<h3 className='overflow-hidden text-ellipsis'>{item.track.name}</h3>
 										</Link>
 										<div className='flex flex-wrap items-center gap-x-1'>
 											{item.track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
@@ -97,8 +97,8 @@ export default function Playlist() {
 										</div>
 									</div>
 								</div>
-								<div className='hidden lg:flex'>
-									<Link className=' hover:underline' href={`/album/${item.track.album.id}`}>
+								<div className='hidden lg:flex overflow-hidden text-ellipsis whitespace-nowrap'>
+									<Link className=' hover:underline overflow-hidden text-ellipsis' href={`/album/${item.track.album.id}`}>
 										{item.track.album.name}
 									</Link>
 								</div>

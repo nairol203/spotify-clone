@@ -29,18 +29,18 @@ export default function Track() {
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>
 			<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
-				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'>
+				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60 aspect-square'>
 					<Image
 						src={track.data.album.images?.[0]?.url}
 						alt={`Album Cover from ${track.data.name}`}
 						fill
 						sizes='8rem 11rem 15rem'
-						className='rounded-full object-cover'
+						className='rounded-full object-cover aspect-square'
 					/>
 				</div>
 				<div className='grid gap-2 md:gap-4'>
-					<span>{track.data.type}</span>
-					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{track.data.name}</h1>
+					<span className='capitalize'>{track.data.type}</span>
+					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl overflow-hidden text-ellipsis whitespace-nowrap'>{track.data.name}</h1>
 					<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
 						<div className='flex gap-1'>
 							{track.data.album.artists.map((artist, index) => (

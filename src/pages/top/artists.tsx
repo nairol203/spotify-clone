@@ -30,17 +30,17 @@ export default function Home() {
 			<div>
 				<div className='grid grid-cols-[1.25rem_1fr] items-center gap-4 px-4 py-2 text-gray-400'>
 					<span className='flex justify-center'>#</span>
-					<span>Titel</span>
+					<span>Künstler*in</span>
 				</div>
 				<div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
 				<div>
 					{topTracks.data ? topTracks.data.items.map((artist, index) => (
 						<div className='grid grid-cols-[1.25rem_1fr] items-center gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={artist.id}>
 							<div className='flex w-5 justify-center'>{index + 1}</div>
-							<div className='flex items-center gap-4'>
+							<div className='flex items-center gap-4 overflow-hidden text-ellipsis whitespace-nowrap'>
 								<Image className='rounded-sms aspect-square max-w-none' src={artist.images[0].url} height={50} width={50} alt='Album Cover' />
-								<Link className='hover:underline' href={`/artist/${artist.id}`}>
-									<h3>{artist.name}</h3>
+								<Link className='hover:underline overflow-hidden text-ellipsis' href={`/artist/${artist.id}`}>
+									<h3 className='overflow-hidden text-ellipsis'>{artist.name}</h3>
 								</Link>
 							</div>
 						</div>

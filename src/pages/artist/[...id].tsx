@@ -85,12 +85,12 @@ export default function Artist() {
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>
 			<div className='flex items-center gap-4 md:gap-6 lg:gap-8'>
-				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60'>
-					<Image src={artist.images?.[0]?.url} alt={`Album Cover from ${artist.name}`} fill sizes='8rem 11rem 15rem' className='rounded-full object-cover' />
+				<div className='relative h-32 w-32 md:h-44 md:w-44 lg:h-60 lg:w-60 aspect-square'>
+					<Image src={artist.images?.[0]?.url} alt={`Album Cover from ${artist.name}`} fill sizes='8rem 11rem 15rem' className='rounded-full object-cover aspect-square' />
 				</div>
 				<div className='grid gap-2 md:gap-4'>
 					<span>Künster*in</span>
-					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{artist.name}</h1>
+					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl overflow-hidden text-ellipsis whitespace-nowrap'>{artist.name}</h1>
 					<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
 						<span>{new Intl.NumberFormat('de-DE').format(artist.followers.total)} Follower*innen</span>
 					</div>

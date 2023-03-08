@@ -37,13 +37,13 @@ export default function Home() {
 				<div className='mb-4 h-0.5 w-full rounded-full bg-gray-400 bg-opacity-10' />
 				<div>
 					{(topTracks.data ? topTracks.data.items.map((track, index) => (
-						<div className='flex  items-center justify-between gap-2 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={track.id + index}>
-							<div className='flex items-center gap-4' key={track.id}>
-								<span className='flex w-5 justify-center'>{index + 1}</span>
+						<div className='grid grid-cols-[1.25rem_6fr_1fr] items-center justify-between gap-4 rounded-[4px] px-4 py-2 md:hover:bg-white md:hover:bg-opacity-10' key={track.id + index}>
+							<span className='flex w-5 justify-center'>{index + 1}</span>
+							<div className='flex items-center gap-4 overflow-hidden text-ellipsis whitespace-nowrap'>
 								<Image className='aspect-square max-w-none rounded-sm' src={track.album.images[0].url} height={50} width={50} alt='Album Cover' />
-								<div>
-									<Link href={`/track/${track.id}`} className='hover:underline'>
-										<h3>{track.name}</h3>
+								<div className='overflow-hidden text-ellipsis'>
+									<Link href={`/track/${track.id}`} className='hover:underline overflow-hidden text-ellipsis'>
+										<h3 className='overflow-hidden text-ellipsis'>{track.name}</h3>
 									</Link>
 									<div className='flex flex-wrap items-center gap-x-1'>
 										{track.explicit && <span className='rounded-sm bg-slate-300 py-[1px] px-[5.5px] text-[10px] text-black'>E</span>}
@@ -58,7 +58,7 @@ export default function Home() {
 									</div>
 								</div>
 							</div>
-							<span className='sm:mr-2'>{msToString(track.duration_ms)}</span>
+							<span className='flex justify-end'>{msToString(track.duration_ms)}</span>
 						</div>
 					)) : <SkeletonObjectDynamic count={25} type='track' ranking />)}
 				</div>
