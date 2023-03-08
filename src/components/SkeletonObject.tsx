@@ -22,8 +22,12 @@ const SkeletonObject: React.FC<{ type: 'track' | 'album' | 'albumCard' | 'trackR
 	if (type == 'albumCard') {
 		return (
 			<div>
-				<div className='skeleton grid max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10'>
-					<div className='h-[150px] w-[150px]'></div>
+				<div className='grid max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10'>
+					<div className='skeleton h-[150px] w-[150px]'></div>
+					<h3 className='skeleton overflow-hidden text-ellipsis whitespace-nowrap'>Lorem, ipsum.</h3>
+					<div className='flex gap-1.5'>
+						<span className="skeleton">Künstler*in</span>
+					</div>
 				</div>
 			</div>
 		);

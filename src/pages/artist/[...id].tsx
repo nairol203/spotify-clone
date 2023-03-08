@@ -15,6 +15,12 @@ export default function Artist() {
 	const { data: dataAlbums } = trpc.artistAlbums.useQuery({ artistId: router.query['id']?.[0] as string, includeGroups: includedGroups });
 	const { data: dataAlbumsAppearsOn } = trpc.artistAlbums.useQuery({ artistId: router.query['id']?.[0] as string, includeGroups: ['appears_on'] });
 
+	function getGridClassByIndex(index: number): string | null {
+		const gridSizes = ['grid', 'grid', 'grid', 'grid md:hidden lg:grid', 'grid md:hidden xl:grid', 'grid md:hidden 2xl:grid', 'grid md:hidden 3xl:grid', 'grid md:hidden 4xl:grid'];
+
+		return index < gridSizes.length ? gridSizes[index] : 'grid md:hidden';
+	}
+
 	if (!data || !dataAlbums || !dataAlbumsAppearsOn)
 		return (
 			<div className='mt-8 grid gap-4 md:py-4'>
@@ -33,14 +39,14 @@ export default function Artist() {
 						<h2 className='skeleton'>Lorem, ipsum.</h2>
 					</div>
 					<div>
-						<SkeletonObjectDynamic count={5} type='track' ranking />
+						<SkeletonObjectDynamic count={5} type='album' ranking />
 					</div>
 				</div>
 				<div className='grid gap-4'>
 					<div className='flex'>
 						<h2 className='skeleton'>Lorem, ipsum.</h2>
 					</div>
-					<div className='flex gap-2'>
+					<div className='flex flex-wrap gap-2'>
 						<button className='skeleton secondary-button' disabled>
 							Beliebte Veröffentlichungen
 						</button>
@@ -51,7 +57,7 @@ export default function Artist() {
 							Singles und EPs
 						</button>
 					</div>
-					<div className='flex gap-4'>
+					<div className='flex gap-4 overflow-x-auto'>
 						<SkeletonObjectDynamic count={8} type='albumCard' />
 					</div>
 				</div>
@@ -59,7 +65,7 @@ export default function Artist() {
 					<div className='flex'>
 						<h2 className='skeleton'>Lorem, ipsum.</h2>
 					</div>
-					<div className='flex gap-4'>
+					<div className='flex gap-4 overflow-x-auto'>
 						<SkeletonObjectDynamic count={8} type='albumCard' />
 					</div>
 				</div>
@@ -67,7 +73,7 @@ export default function Artist() {
 					<div className='flex'>
 						<h2 className='skeleton'>Lorem, ipsum.</h2>
 					</div>
-					<div className='flex gap-4'>
+					<div className='flex gap-4 overflow-x-auto'>
 						<SkeletonObjectDynamic count={8} type='albumCard' />
 					</div>
 				</div>
@@ -75,12 +81,6 @@ export default function Artist() {
 		);
 
 	const { artist, topTracks, relatedArtists } = data;
-
-	function getGridClassByIndex(index: number): string | null {
-		const gridSizes = ['grid', 'hidden sm:grid', 'hidden md:grid', 'hidden lg:grid', 'hidden xl:grid', 'hidden 2xl:grid', 'hidden 3xl:grid', 'hidden 4xl:grid'];
-
-		return index < gridSizes.length ? gridSizes[index] : 'hidden';
-	}
 
 	return (
 		<div className='mt-8 grid gap-4 md:py-4'>
@@ -140,7 +140,7 @@ export default function Artist() {
 						Singles und EPs
 					</button>
 				</div>
-				<div className='flex gap-4'>
+				<div className='flex gap-4 overflow-x-auto'>
 					{dataAlbums.items
 						.sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
 						.map((album, index) => (
@@ -149,7 +149,9 @@ export default function Artist() {
 								key={album.id + index}
 								className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
 							>
-								<Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
+								<div className='w-[150px] h-[150px]'>
+									<Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
+								</div>
 								<h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{album.name}</h3>
 								<div className='flex gap-1.5'>
 									<span>{new Date(album.release_date).getFullYear()}</span>
@@ -161,14 +163,16 @@ export default function Artist() {
 			</div>
 			<div className='grid gap-2'>
 				<h2>Was anderen Fans gefällt</h2>
-				<div className='flex gap-4'>
+				<div className='flex gap-4 overflow-x-auto'>
 					{relatedArtists.artists.slice(0, 8).map((artist, index) => (
 						<Link
 							href={`/artist/${artist.id}`}
 							key={artist.id + index}
 							className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
 						>
-							<Image src={artist.images[0].url} width={150} height={150} alt={`Album Cover from ${artist.name}`} className='aspect-square rounded-full' />
+							<div className='w-[150px] h-[150px]'>
+								<Image src={artist.images[0].url} width={150} height={150} alt={`Album Cover from ${artist.name}`} className='aspect-square rounded-full' />
+							</div>
 							<h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{artist.name}</h3>
 							<div className='flex gap-1.5'>
 								<span>Künstler*in</span>
@@ -179,14 +183,16 @@ export default function Artist() {
 			</div>
 			<div className='grid gap-2'>
 				<h2>Enthalten in</h2>
-				<div className='flex gap-4'>
+				<div className='flex gap-4 overflow-x-auto'>
 					{dataAlbumsAppearsOn.items.slice(0, 8).map((album, index) => (
 						<Link
 							href={`/album/${album.id}`}
 							key={album.id + index}
 							className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
 						>
-							<Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
+							<div className='w-[150px] h-[150px]'>
+								<Image src={album.images[0].url} width={150} height={150} alt={`Album Cover from ${album.name}`} className='aspect-square' />
+							</div>
 							<h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{album.name}</h3>
 							<div className='flex gap-1.5'>
 								<span>{new Date(album.release_date).getFullYear()}</span>
