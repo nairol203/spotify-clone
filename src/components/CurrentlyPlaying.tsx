@@ -93,8 +93,8 @@ export default function CurrentlyPlaying() {
                     </button> */}
 				</div>
 				<div className='sm:hidden'>
-					<button title={currentlyPlaying.data.is_playing ? 'Pause' : 'Play'} onClick={togglePlay} className='rounded-full  bg-white p-1.5'>
-						<FontAwesomeIcon height={25} width={25} icon={currentlyPlaying.data.is_playing ? faPause : faPlay} className=' text-black' />
+					<button title={currentlyPlaying.data.is_playing ? 'Pause' : 'Play'} onClick={togglePlay} >
+						<FontAwesomeIcon height={25} width={25} icon={currentlyPlaying.data.is_playing ? faPause : faPlay} />
 					</button>
 				</div>
 				<div className='absolute bottom-0 h-1 w-11/12 rounded-full  bg-gray-600 sm:hidden'>
