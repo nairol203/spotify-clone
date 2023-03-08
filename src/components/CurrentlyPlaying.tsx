@@ -22,7 +22,7 @@ export default function CurrentlyPlaying() {
 
 	if (currentlyPlaying.data?.currently_playing_type === 'track') {
 		return (
-			<div className='relative flex h-full w-full items-center border-t-[1px] border-t-[#282828] bg-darkMode-card px-4 sm:grid sm:grid-cols-[1fr_1fr_1fr]'>
+			<div className='overflow-hidden text-ellipsis whitespace-nowrap relative flex h-full w-full items-center border-t-[1px] border-t-[#282828] bg-darkMode-card px-4 sm:grid sm:grid-cols-[1fr_1fr_1fr]'>
 				<div className='flex gap-4'>
 					<div className='relative h-12 w-12 sm:h-16 sm:w-16'>
 						<Image
