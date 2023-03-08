@@ -22,8 +22,8 @@ export default function CurrentlyPlaying() {
 
 	if (currentlyPlaying.data?.currently_playing_type === 'track') {
 		return (
-			<div className='overflow-hidden text-ellipsis whitespace-nowrap relative flex h-full w-full items-center border-t-[1px] border-t-[#282828] bg-darkMode-card px-4 sm:grid sm:grid-cols-[1fr_1fr_1fr]'>
-				<div className='flex gap-4'>
+			<div className='justify-between gap-4 sm:gap-0 sm:justify-start overflow-hidden text-ellipsis whitespace-nowrap relative flex h-full w-full items-center border-t-[1px] border-t-[#282828] bg-darkMode-card px-4 sm:grid sm:grid-cols-[1fr_1fr_1fr]'>
+				<div className='flex gap-4 overflow-hidden text-ellipsis'>
 					<div className='relative h-12 w-12 sm:h-16 sm:w-16'>
 						<Image
 							className='aspect-square max-w-none rounded-sm object-contain'
@@ -36,8 +36,8 @@ export default function CurrentlyPlaying() {
 							sizes='3rem 4rem'
 						/>
 					</div>
-					<div className='flex flex-col justify-center'>
-						<Link className='hover:underline' href={`/track/${currentlyPlaying.data.item?.id}`}>
+					<div className='flex flex-col justify-center overflow-hidden text-ellipsis'>
+						<Link className='hover:underline overflow-hidden text-ellipsis' href={`/track/${currentlyPlaying.data.item?.id}`}>
 							{currentlyPlaying.data?.item?.name}
 						</Link>
 						<div className='flex gap-1'>
@@ -91,6 +91,11 @@ export default function CurrentlyPlaying() {
 					{/* <button disabled>
                         <FontAwesomeIcon height={30} width={30} icon={faBars} />
                     </button> */}
+				</div>
+				<div className='sm:hidden'>
+					<button title={currentlyPlaying.data.is_playing ? 'Pause' : 'Play'} onClick={togglePlay} className='rounded-full  bg-white p-1.5'>
+						<FontAwesomeIcon height={25} width={25} icon={currentlyPlaying.data.is_playing ? faPause : faPlay} className=' text-black' />
+					</button>
 				</div>
 				<div className='absolute bottom-0 h-1 w-11/12 rounded-full  bg-gray-600 sm:hidden'>
 					<div
