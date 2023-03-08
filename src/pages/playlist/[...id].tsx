@@ -103,7 +103,7 @@ export default function Playlist() {
 									</Link>
 								</div>
 								<span className='hidden lg:block'>
-									{new Date().getDate() - new Date(item.added_at).getDate() < 2.419e9
+									{new Date().getTime() - new Date(item.added_at).getTime() > 86400000
 										? new Date(item.added_at).toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
 										: calcTime(new Date(item.added_at))}
 								</span>

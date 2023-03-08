@@ -35,7 +35,7 @@ export default function User() {
 					/>
 				</div>
 				<div className='grid gap-2 md:gap-4'>
-					<span>{profile.data.type}</span>
+					<span>Profil</span>
 					<h1 className='text-2xl sm:text-4xl md:text-4xl lg:text-6xl'>{profile.data.display_name}</h1>
 					<div className='flex gap-1.5 text-xs sm:text-sm md:text-base'>
 						<span>{new Intl.NumberFormat('de-DE').format(profile.data.followers?.total ?? 0)} Follower*innen</span>

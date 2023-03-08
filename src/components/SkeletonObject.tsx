@@ -1,4 +1,24 @@
-const SkeletonObject: React.FC<{ type: 'track' | 'album' | 'albumCard'; ranking?: boolean }> = ({ type, ranking }) => {
+const SkeletonObject: React.FC<{ type: 'track' | 'album' | 'albumCard' | 'trackRecently'; ranking?: boolean }> = ({ type, ranking }) => {
+	if (type == 'trackRecently') {
+		return (
+			<div className='grid grid-cols-[6fr_1fr] lg:grid-cols-[7fr_2fr_1fr] items-center justify-between gap-2 rounded-[4px] p-2 px-4  hover:bg-white hover:bg-opacity-10'>
+				<div className='flex items-center gap-4'>
+					<div className='skeleton h-[50px] w-[50px]'></div>
+					<div>
+						<h3 className='skeleton'>Lorem, ipsum.</h3>
+						<div className='flex flex-wrap items-center gap-1'>
+							<div>
+								<a className='skeleton text-sm text-gray-300 hover:underline'>Lorem, ipsum.</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className='hidden lg:flex'><span className="skeleton">Lorem, ipsum.</span></div>
+				<div className="flex justify-end"><span className='skeleton'>4:20</span></div>
+			</div>
+		)
+	}
+	
 	if (type == 'albumCard') {
 		return (
 			<div>
@@ -62,7 +82,7 @@ const SkeletonObjectDetailed: React.FC<{ type: 'track' | 'album'; ranking?: bool
 	);
 };
 
-export const SkeletonObjectDynamic: React.FC<{ count: number; type: 'track' | 'album' | 'albumCard'; ranking?: boolean }> = ({ count, type, ranking }) => {
+export const SkeletonObjectDynamic: React.FC<{ count: number; type: 'track' | 'album' | 'albumCard' | 'trackRecently'; ranking?: boolean }> = ({ count, type, ranking }) => {
 	const skeletonCards: JSX.Element[] = [];
 
 	for (let i = 0; i < count; i++) {
