@@ -34,9 +34,9 @@ export default function UserDropdown() {
 						<Link onClick={() => setActive(false)} className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href={`/user/${session.user.id}`}>
 							Profil
 						</Link>
-						<Link onClick={() => setActive(false)} className='rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10' href='/settings'>
+						<button disabled className='flex cursor-not-allowed rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10'>
 							Einstellungen
-						</Link>
+						</button>
 						<div className='mx-auto my-0.5 h-[0.05rem] w-11/12 rounded-full bg-gray-500' />
 						<button onClick={() => signOut()} className='flex rounded-sm px-3 py-2 hover:bg-white hover:bg-opacity-10'>
 							Abmelden
