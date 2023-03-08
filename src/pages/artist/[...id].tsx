@@ -1,4 +1,6 @@
 import { SkeletonObjectDynamic } from '@components/SkeletonObject';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { msToString } from '@lib/helpers';
 import { trpc } from '@lib/trpc';
 import Image from 'next/image';
@@ -170,8 +172,14 @@ export default function Artist() {
 							key={artist.id + index}
 							className={`${getGridClassByIndex(index)} max-w-[calc(150px+2rem)] gap-2 rounded-md bg-black p-4 hover:bg-white hover:bg-opacity-10`}
 						>
-							<div className='w-[150px] h-[150px]'>
-								<Image src={artist.images[0].url} width={150} height={150} alt={`Album Cover from ${artist.name}`} className='aspect-square rounded-full' />
+							<div className='h-[150px] w-[150px]'>
+								{artist.images[0]?.url ? (
+									<Image src={artist.images[0].url} width={150} height={150} alt={`Album Cover from ${artist.name}`} className='aspect-square rounded-full' />
+								) : (
+									<div className='flex h-[150px] w-[150px] items-center justify-center rounded-full bg-gray-500'>
+										<FontAwesomeIcon icon={faUser} height={100} width={100} />
+									</div>
+								)}
 							</div>
 							<h3 className='overflow-hidden text-ellipsis whitespace-nowrap'>{artist.name}</h3>
 							<div className='flex gap-1.5'>
